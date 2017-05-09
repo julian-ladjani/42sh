@@ -1,0 +1,5 @@
+echo -n "\e[1;36m"
+echo -n "\e[1;33m➜  \e[1;36m"
+echo -n $PWD || echo "?>"
+echo -n " "
+echo -n "\e[0m"
