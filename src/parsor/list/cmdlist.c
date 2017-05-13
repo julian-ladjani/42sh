@@ -5,29 +5,24 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Sat May 13 15:11:35 2017 Ladjani Julian
+** Last update Fri May 12 23:05:58 2017 Ladjani Julian
 */
 
-#include "minishell.h"
+#include "42sh.h"
 
-t_envlist	*envlist_create()
+t_list		*cmdlist_create()
 {
-  t_envlist	*root;
+  t_cmdlist	*root;
 
   if (((root = malloc(sizeof(*root))) != NULL))
     {
-      root->env = NULL;
-      root->envkey = NULL;
-      root->envvalue = NULL;
-      root->first = 1;
       root->prev = root;
       root->next = root;
-      return (root);
     }
-  return (NULL);
+  return (root);
 }
 
-void		clean_envlist(t_envlist *list)
+void		clean_cmdlist(t_cmdlist *list)
 {
   while (list->next != NULL && list->next->first == 1)
     {
@@ -37,22 +32,19 @@ void		clean_envlist(t_envlist *list)
   free(list);
 }
 
-void		delete_envlist(t_envlist *list)
+void		delete_cmdlist(t_cmdlist *list)
 {
-  clean_envlist(list);
+  clean_cmdlist(list);
   free(list);
 }
 
-t_envlist	*addenvelem_before(t_envlist *elem)
+t_cmdlist	*addcmdelem_before(t_cmdlist *elem)
 {
-  t_envlist	*new_elem;
+  t_cmdlist	*new_elem;
 
   if (((new_elem = malloc(sizeof(*new_elem))) != NULL))
     {
-      new_elem->env = NULL;
-      new_elem->envkey = NULL;
-      new_elem->envvalue = NULL;
-      new_elem->first = 0;
+      new_elem->path = NULL;
       new_elem->prev = elem->prev;
       new_elem->next = elem;
       elem->prev->next = new_elem;
@@ -62,16 +54,13 @@ t_envlist	*addenvelem_before(t_envlist *elem)
   return (NULL);
 }
 
-t_envlist	*addenvelem_after(t_envlist *elem)
+t_cmdlist	*addcmdelem_after(t_cdlist *elem)
 {
-  t_list	*new_elem;
+  t_cdlist	*new_elem;
 
   if (((new_elem = malloc(sizeof(*new_elem))) != NULL))
     {
-      new_elem->env = NULL;
-      new_elem->envkey = NULL;
-      new_elem->envvalue = NULL;
-      new_elem->first = 0;
+      new_elem->path = NULL;
       new_elem->next = elem->next;
       new_elem->prev = elem;
       elem->next->prev = new_elem;

@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May  8 17:22:03 2017 Ladjani Julian
-** Last update Tue May  9 14:06:23 2017 Ladjani Julian
+** Last update Fri May 12 16:33:22 2017 Ladjani Julian
 */
 
 #ifndef 42STRUCTS_H_
@@ -88,10 +88,15 @@ typedef struct		s_mysh
   int			exitval;
   int			exit;
   t_cmdlist		*cmd;
+  char			*cmdbuffer;
   char			**history;
+  char			**rc;
+  char			**prompt;
   t_cdlist		*cdstack;
   t_aliaslist		*alias;
   t_envlist		*env;
+  struct termios	newt;
+  struct termios	oldt;
 }			t_mysh;
 
 #endif /* !42STRUCTS_H_ */

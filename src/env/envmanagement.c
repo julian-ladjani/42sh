@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Jan Jan 22 21:08:00 2017 Julian Ladjani
-** Last update Tue May  9 17:32:27 2017 Ladjani Julian
+** Last update Tue May  9 23:46:46 2017 Ladjani Julian
 */
 
 #include "minishell.h"
@@ -53,7 +53,18 @@ t_envlist	*search_in_envlist(t_envlist *root, char *word)
 
 void		str_to_env(t_mysh *vars, char *envvar, char *value)
 {
-  
+  t_envlist	*elem;
+
+  if ((elem = search_in_envlist(vars->env, envvar)) == NULL)
+    {
+      addenvelem_before(vars->env);
+      elem = vars->env->prev;
+    }
+  elem->envkey = strdup(envvar);
+  elem->envvalue = strdup(value);
+  elem->env = strdup(elem->envkey);
+  elem->env = my_strcat(elem->envkey, "=\0");
+  elem->env = my_strcat(elem->envkey, elem->envvalue);
 }
 
 char		*set_my_path(char *path, char *cmd)

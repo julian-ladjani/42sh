@@ -5,20 +5,19 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Sat May 13 15:11:35 2017 Ladjani Julian
+** Last update Sat May 13 15:11:01 2017 Ladjani Julian
 */
 
-#include "minishell.h"
+#include "42h.h"
 
-t_envlist	*envlist_create()
+t_aliaslist	*aliaslist_create()
 {
-  t_envlist	*root;
+  t_aliaslist	*root;
 
   if (((root = malloc(sizeof(*root))) != NULL))
     {
-      root->env = NULL;
-      root->envkey = NULL;
-      root->envvalue = NULL;
+      root->aliaskey = NULL;
+      root->aliasvalue = NULL;
       root->first = 1;
       root->prev = root;
       root->next = root;
@@ -27,7 +26,7 @@ t_envlist	*envlist_create()
   return (NULL);
 }
 
-void		clean_envlist(t_envlist *list)
+void		clean_aliaslist(t_aliaslist *list)
 {
   while (list->next != NULL && list->next->first == 1)
     {
@@ -37,21 +36,20 @@ void		clean_envlist(t_envlist *list)
   free(list);
 }
 
-void		delete_envlist(t_envlist *list)
+void		delete_aliaslist(t_aliaslist *list)
 {
-  clean_envlist(list);
+  clean_cdlist(list);
   free(list);
 }
 
-t_envlist	*addenvelem_before(t_envlist *elem)
+t_aliaslist	*addaliaselem_before(t_aliaslist *elem)
 {
-  t_envlist	*new_elem;
+  t_aliaslist	*new_elem;
 
   if (((new_elem = malloc(sizeof(*new_elem))) != NULL))
     {
-      new_elem->env = NULL;
-      new_elem->envkey = NULL;
-      new_elem->envvalue = NULL;
+      new_elem->aliaskey = NULL;
+      new_elem->aliasvalue = NULL;
       new_elem->first = 0;
       new_elem->prev = elem->prev;
       new_elem->next = elem;
@@ -62,15 +60,14 @@ t_envlist	*addenvelem_before(t_envlist *elem)
   return (NULL);
 }
 
-t_envlist	*addenvelem_after(t_envlist *elem)
+t_aliaslist	addaliaselem_after(t_aliaslist *elem)
 {
-  t_list	*new_elem;
+  t_aliaslist	*new_elem;
 
   if (((new_elem = malloc(sizeof(*new_elem))) != NULL))
     {
-      new_elem->env = NULL;
-      new_elem->envkey = NULL;
-      new_elem->envvalue = NULL;
+      new_elem->aliaskey = NULL;
+      new_elem->aliasvalue = NULL;
       new_elem->first = 0;
       new_elem->next = elem->next;
       new_elem->prev = elem;

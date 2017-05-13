@@ -5,12 +5,12 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Tue May  9 15:52:32 2017 Ladjani Julian
+** Last update Sat May 13 15:14:47 2017 Ladjani Julian
 */
 
 #include "minishell.h"
 
-t_list		*cdlist_create()
+t_cdlist	*cdlist_create()
 {
   t_cdlist	*root;
 
@@ -19,8 +19,9 @@ t_list		*cdlist_create()
       root->path = NULL;
       root->prev = root;
       root->next = root;
+      return (root);
     }
-  return (root);
+  return (NULL);
 }
 
 void		clean_cdlist(t_cdlist *list)
@@ -35,11 +36,11 @@ void		clean_cdlist(t_cdlist *list)
 
 void		delete_cdlist(t_cdlist *list)
 {
-  clean_list(list);
+  clean_cdlist(list);
   free(list);
 }
 
-void		addcdelem_before(t_cdlist *elem)
+t_cdlist	*addcdelem_before(t_cdlist *elem)
 {
   t_cdlist	*new_elem;
 
@@ -50,10 +51,12 @@ void		addcdelem_before(t_cdlist *elem)
       new_elem->next = elem;
       elem->prev->next = new_elem;
       elem->prev = new_elem;
+      return (new_elem);
     }
+  return (NULL);
 }
 
-void		addcdelem_after(t_cdlist *elem)
+t_cdlist	addcdelem_after(t_cdlist *elem)
 {
   t_cdlist	*new_elem;
 
@@ -64,5 +67,7 @@ void		addcdelem_after(t_cdlist *elem)
       new_elem->prev = elem;
       elem->next->prev = new_elem;
       elem->next = new_elem;
+      return (new_elem);
     }
+  return (NULL);
 }

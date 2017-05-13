@@ -5,34 +5,34 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Tue May  9 23:52:09 2017 Ladjani Julian
+** Last update Wed May 10 00:47:49 2017 Ladjani Julian
 */
 
-#include "minishell.h"
+#include "42sh.h"
 
-void		addcdelem_first(t_cdlist *root)
+void		addcmdelem_first(t_cmdlist *root)
 {
   addcdelem_after(root);
 }
 
-void		addcdelem_last(t_cdlist *root)
+void		addcmdelem_last(t_cmdlist *root)
 {
-  addcdelem_before(root);
+  addcmdelem_before(root);
 }
 
-void		delcdelem_first(t_cdlist *root)
+void		delcmdelem_first(t_cmdlist *root)
 {
   if (root->next != root)
-    delcdelem(root->next);
+    delcmdelem(root->next);
 }
 
-void		delcdelem_last(t_cdlist *root)
+void		delcmdelem_last(t_cmdlist *root)
 {
   if (root->prev != root)
-    delcdelem(root->prev);
+    delcmdelem(root->prev);
 }
 
-void		delcdelem(t_cdlist *elem)
+void		delcmdelem(t_cmdlist *elem)
 {
   if (elem->path != NULL)
     free(elem->path);

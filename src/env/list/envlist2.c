@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Tue May  9 13:15:54 2017 Ladjani Julian
+** Last update Tue May  9 23:49:32 2017 Ladjani Julian
 */
 
 #include "minishell.h"
@@ -34,6 +34,12 @@ void		delenvelem_last(t_envlist *root)
 
 void		delenvelem(t_envlist *elem)
 {
+  if (elem->envkey != NULL)
+    free(elem->envkey);
+  if (elem->envalue != NULL)
+    free(elem->envvalue);
+  if (elem->env != NULL)
+    free(elem->env);
   elem->prev->next = elem->next;
   elem->next->prev = elem->prev;
   free(elem);

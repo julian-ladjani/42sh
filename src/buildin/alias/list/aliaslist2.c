@@ -5,34 +5,34 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Tue May  9 23:52:09 2017 Ladjani Julian
+** Last update Sat May 13 04:02:40 2017 Ladjani Julian
 */
 
 #include "minishell.h"
 
-void		addcdelem_first(t_cdlist *root)
+void		addaliaselem_first(t_aliaslist *root)
 {
-  addcdelem_after(root);
+  addaliaselem_after(root);
 }
 
-void		addcdelem_last(t_cdlist *root)
+void		addaliaselem_last(t_aliaslist *root)
 {
-  addcdelem_before(root);
+  addaliaselem_before(root);
 }
 
-void		delcdelem_first(t_cdlist *root)
+void		delaliaselem_first(t_aliaslist *root)
 {
   if (root->next != root)
-    delcdelem(root->next);
+    delaliaselem(root->next);
 }
 
-void		delcdelem_last(t_cdlist *root)
+void		delcdelem_last(t_aliaslist *root)
 {
   if (root->prev != root)
-    delcdelem(root->prev);
+    delaliaselem(root->prev);
 }
 
-void		delcdelem(t_cdlist *elem)
+void		delcdelem(t_aliaslist *elem)
 {
   if (elem->path != NULL)
     free(elem->path);

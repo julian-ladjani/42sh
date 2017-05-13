@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May  8 23:33:12 2017 Ladjani Julian
-** Last update Tue May  9 10:55:12 2017 Ladjani Julian
+** Last update Sat May 13 16:09:36 2017 Ladjani Julian
 */
 
 #ifndef 42SH_H_
@@ -29,6 +29,7 @@
 GET_NEXT_LINE DEFINE
 */
 # define READ_SIZE 512
+# define BUFF_SIZE 512
 /*
 ** 42SH OPERATORS
 */
@@ -42,6 +43,13 @@ GET_NEXT_LINE DEFINE
 # define OR_CHAR "||"
 # define OPEN_PAR "("
 # define CLOSE_PAR ")"
+# define DQUOTE_CHAR '"'
+# define SQUOTE_CHAR '\''
+# define INHIB_CHAR '\\'
+# define ENV_VAR_CHAR '$'
+# define STAR_CHAR '*'
+# define SPACE_CHAR ' '
+# define TAB_CHAR '\t'
 /*
 ** 42SH FILE NAME
 */
