@@ -5,10 +5,10 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Jan Jan 22 21:08:00 2017 Julian Ladjani
-** Last update Tue May  9 23:46:46 2017 Ladjani Julian
+** Last update Mon May 15 23:56:20 2017 Ladjani Julian
 */
 
-#include "minishell.h"
+#include "sh.h"
 
 char		**env_to_tabenv(t_envlist *root)
 {

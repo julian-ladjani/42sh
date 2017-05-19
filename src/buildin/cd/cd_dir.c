@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 21:45:42 2017 Ladjani Julian
-** Last update Tue May  9 21:56:44 2017 Ladjani Julian
+** Last update Thu May 18 01:51:51 2017 Ladjani Julian
 */
 
-#include "42sh.h"
+#include "sh.h"
 
 int		my_cd(t_mysh *vars)
 {
@@ -19,8 +19,8 @@ int		my_cd(t_mysh *vars)
   if ((pwdelem = search_in_envlist(vars->env, "$PWD")) == NULL)
     pwd = strdup(getcwd(NULL, 0));
   else
-    pwd = strdup(pwdelem->value);
-  if (chdir(home->envvalue) < 0)
+    pwd = strdup(pwdelem->envvalue);
+  if (chdir(pwdelem->envvalue) < 0)
     {
       printf("%s: %s.\n", vars->cmd->data->av[1], strerror(errno));
       return (ERROR_RETURN);
@@ -30,6 +30,6 @@ int		my_cd(t_mysh *vars)
     return (ERROR_RETURN);
   cdfield->path = strdup(pwd);
   free(pwd);
-  str_to_env(vars->env, "$PWD", getcwd(NULL, 0));
+  str_to_env(vars, "$PWD", getcwd(NULL, 0));
   return (SUCCES_RETURN);
 }

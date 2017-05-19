@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 13:31:19 2017 Ladjani Julian
-** Last update Tue May  9 21:44:08 2017 Ladjani Julian
+** Last update Thu May 18 01:42:29 2017 Ladjani Julian
 */
 
-#include "42sh.h"
+#include "sh.h"
 
 int		cd_main(t_mysh *vars)
 {
@@ -18,10 +18,10 @@ int		cd_main(t_mysh *vars)
   returnvalue = 0;
   cmd = vars->cmd->data;
   if (my_tablen(cmd->av) < 2)
-    returnvalue = my_cd_no_args(vars, cmd);
+    returnvalue = cd_no_args(vars);
   else if (my_tablen(cmd->av) > 1 && strncmp(cmd->av[1], "-", 1) == 0)
-    returnvalue = my_cd_back(vars, cmd);
+    returnvalue = my_cd_back(vars);
   else
-    returnvalue = my_cd(vars, cmd);
+    returnvalue = my_cd(vars);
   return (returnvalue);
 }

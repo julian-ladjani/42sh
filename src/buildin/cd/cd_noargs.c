@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 17:10:16 2017 Ladjani Julian
-** Last update Tue May  9 20:46:46 2017 Ladjani Julian
+** Last update Thu May 18 01:52:27 2017 Ladjani Julian
 */
 
-#include "42sh.h"
+#include "sh.h"
 
 int		cd_no_args(t_mysh *vars)
 {
@@ -24,7 +24,7 @@ int		cd_no_args(t_mysh *vars)
   if ((pwdelem = search_in_envlist(vars->env, "$PWD")) == NULL)
     pwd = strdup(getcwd(NULL, 0));
   else
-    pwd = strdup(pwdelem->value);
+    pwd = strdup(pwdelem->envvalue);
   if (chdir(home->envvalue) < 0)
     {
       printf("cd: Can't change to home directory.\n");
@@ -42,6 +42,6 @@ int		cd_no_args2(t_mysh *vars, char *pwd)
     return (ERROR_RETURN);
   cdfield->path = strdup(pwd);
   free(pwd);
-  str_to_env(vars->env, "$PWD", getcwd(NULL, 0));
+  str_to_env(vars, "$PWD", getcwd(NULL, 0));
   return (SUCCES_RETURN);
 }

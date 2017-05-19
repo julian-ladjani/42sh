@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Thu May 11 18:32:34 2017 Ladjani Julian
-** Last update Fri May 12 23:03:53 2017 Ladjani Julian
+** Last update Thu May 18 16:51:59 2017 Ladjani Julian
 */
 
-#include "42sh.h"
+#include "sh.h"
 
 static t_mysh	*init_my_env(t_mysh *vars, char **ae)
 {
@@ -20,13 +20,13 @@ static t_mysh	*init_my_env(t_mysh *vars, char **ae)
   while (ae[i] != NULL)
     {
       if ((tab = my_str_to_wordtab(ae[i], '=')) == NULL ||
-	  addelem_before(vars->env) == NULL)
+	  addenvelem_before(vars->env) == NULL)
 	return (NULL);
       elem = vars->env->prev;
       if (tab != NULL && tab[0] != NULL)
         {
           elem->envkey = tab[0];
-          if ((elem->env = my_strdup(ae[i])) == NULL)
+          if ((elem->env = strdup(ae[i])) == NULL)
 	    return (NULL);
         }
       if (tab != NULL && tab[0] != NULL && tab[1] != NULL)
@@ -103,7 +103,7 @@ static char	**read_myprompt()
   i = 1;
   while ((line = get_next_line(fd)) != NULL)
     {
-      if ((prompt = realloc(rc, (i  + 1)* sizeof(char *))) == NULL ||
+      if ((prompt = realloc(prompt, (i  + 1)* sizeof(char *))) == NULL ||
 	  (prompt[i - 1] = strdup(line)) == NULL)
 	return (NULL);
       free(line);
@@ -114,7 +114,7 @@ static char	**read_myprompt()
   return (prompt);
 }
 
-t_mysh		*init_prog(char *ae)
+t_mysh		*init_prog(char **ae)
 {
   t_mysh	*mysh;
 
@@ -123,19 +123,21 @@ t_mysh		*init_prog(char *ae)
     return (NULL);
   mysh->exitval = 0;
   mysh->exit = 0;
-  mysh->oldt = tcgetattr(STDIN_FILNO, &oldt);
+  mysh->pcmdcurs = 0;
+  mysh->buffsize = BUFF_SIZE;
+  tcgetattr(STDIN_FILENO, &mysh->oldt);
   mysh->newt = mysh->oldt;
   mysh->newt.c_lflag &= ~(ICANON);
-  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+  tcsetattr(STDIN_FILENO, TCSANOW, &mysh->newt);
   if ((mysh->env = envlist_create()) == NULL ||
-      init_my_env(mysh, ae) == NULL ||
-      mysh->cmd = cmdlist_create() == NULL ||
-      mysh->alias = aliaslist_create() == NULL ||
-      mysh->cdstack = cdlist_create() == NULL ||
+      (init_my_env(mysh, ae)) == NULL ||
+      (mysh->cmd = cmdlist_create()) == NULL ||
+      (mysh->alias = aliaslist_create()) == NULL ||
+      (mysh->cdstack = cdlist_create()) == NULL ||
       (mysh->cmdbuffer = malloc(BUFF_SIZE * sizeof(char))) == NULL ||
       (mysh->history = read_myhistory()) == NULL ||
       (mysh->rc = read_myrc()) == NULL ||
-      (mysh->prompt = read_myprompt() == NULL)
+      (mysh->prompt = read_myprompt()) == NULL)
     return (NULL);
   memset(mysh->cmdbuffer, '\0', BUFF_SIZE);
   return (mysh);

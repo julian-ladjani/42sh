@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Sat May 13 15:11:01 2017 Ladjani Julian
+** Last update Wed May 17 11:18:33 2017 Ladjani Julian
 */
 
-#include "42h.h"
+#include "sh.h"
 
 t_aliaslist	*aliaslist_create()
 {
@@ -38,7 +38,7 @@ void		clean_aliaslist(t_aliaslist *list)
 
 void		delete_aliaslist(t_aliaslist *list)
 {
-  clean_cdlist(list);
+  clean_aliaslist(list);
   free(list);
 }
 
@@ -60,7 +60,7 @@ t_aliaslist	*addaliaselem_before(t_aliaslist *elem)
   return (NULL);
 }
 
-t_aliaslist	addaliaselem_after(t_aliaslist *elem)
+t_aliaslist	*addaliaselem_after(t_aliaslist *elem)
 {
   t_aliaslist	*new_elem;
 

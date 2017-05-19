@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Tue May  9 23:49:32 2017 Ladjani Julian
+** Last update Wed May 17 02:43:33 2017 Ladjani Julian
 */
 
-#include "minishell.h"
+#include "sh.h"
 
 void		addenvelem_first(t_envlist *root)
 {
@@ -36,7 +36,7 @@ void		delenvelem(t_envlist *elem)
 {
   if (elem->envkey != NULL)
     free(elem->envkey);
-  if (elem->envalue != NULL)
+  if (elem->envvalue != NULL)
     free(elem->envvalue);
   if (elem->env != NULL)
     free(elem->env);

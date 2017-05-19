@@ -5,12 +5,12 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 13:17:45 2017 Ladjani Julian
-** Last update Tue May  9 13:23:11 2017 Ladjani Julian
+** Last update Mon May 15 23:59:57 2017 Ladjani Julian
 */
 
-#include "42sh.h"
+#include "sh.h"
 
-void		env_main(t_mysh *vars)
+int		env_main(t_mysh *vars)
 {
   t_envlist	*elem;
 
@@ -20,4 +20,5 @@ void		env_main(t_mysh *vars)
       printf("%s\n", elem->env);
       elem = elem->next;
     }
+  return (0);
 }

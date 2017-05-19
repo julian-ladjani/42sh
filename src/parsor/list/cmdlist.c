@@ -5,36 +5,53 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Fri May 12 23:05:58 2017 Ladjani Julian
+** Last update Thu May 18 14:38:41 2017 Ladjani Julian
 */
 
-#include "42sh.h"
+#include "sh.h"
 
-t_list		*cmdlist_create()
+t_cmddata	*init_my_cmddata()
+{
+  t_cmddata	*data;
+
+  if (((data = malloc(sizeof(*data))) != NULL))
+    {
+      data->mode = NORMAL;
+      data->type = NOTHING;
+      data->std[0] = STDIN_FILENO;
+      data->std[1] = STDOUT_FILENO;
+      data->stdtype[0] = NOTHING;
+      data->stdtype[1] = NOTHING;
+      data->cmd = NULL;
+      data->av = NULL;
+      data->ae = NULL;
+      return (data);
+    }
+  return (NULL);
+}
+
+t_cmdlist	*cmdlist_create()
 {
   t_cmdlist	*root;
 
   if (((root = malloc(sizeof(*root))) != NULL))
     {
+      root->data = init_my_cmddata();
+      root->data->cmd = strdup("ROOT");
       root->prev = root;
       root->next = root;
+      return (root);
     }
-  return (root);
+  return (NULL);
 }
 
 void		clean_cmdlist(t_cmdlist *list)
 {
-  while (list->next != NULL && list->next->first == 1)
+  while (list->next != NULL)
     {
       list = list->next;
       free(list->prev);
     }
-  free(list);
-}
-
-void		delete_cmdlist(t_cmdlist *list)
-{
-  clean_cmdlist(list);
   free(list);
 }
 
@@ -44,7 +61,8 @@ t_cmdlist	*addcmdelem_before(t_cmdlist *elem)
 
   if (((new_elem = malloc(sizeof(*new_elem))) != NULL))
     {
-      new_elem->path = NULL;
+      if ((new_elem->data = init_my_cmddata()) == NULL)
+	return (NULL);
       new_elem->prev = elem->prev;
       new_elem->next = elem;
       elem->prev->next = new_elem;
@@ -54,13 +72,14 @@ t_cmdlist	*addcmdelem_before(t_cmdlist *elem)
   return (NULL);
 }
 
-t_cmdlist	*addcmdelem_after(t_cdlist *elem)
+t_cmdlist	*addcmdelem_after(t_cmdlist *elem)
 {
-  t_cdlist	*new_elem;
+  t_cmdlist	*new_elem;
 
   if (((new_elem = malloc(sizeof(*new_elem))) != NULL))
     {
-      new_elem->path = NULL;
+      if ((new_elem->data = init_my_cmddata()) == NULL)
+        return (NULL);
       new_elem->next = elem->next;
       new_elem->prev = elem;
       elem->next->prev = new_elem;

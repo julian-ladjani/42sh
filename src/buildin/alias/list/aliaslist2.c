@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Sat May 13 04:02:40 2017 Ladjani Julian
+** Last update Wed May 17 11:18:52 2017 Ladjani Julian
 */
 
-#include "minishell.h"
+#include "sh.h"
 
 void		addaliaselem_first(t_aliaslist *root)
 {
@@ -26,16 +26,14 @@ void		delaliaselem_first(t_aliaslist *root)
     delaliaselem(root->next);
 }
 
-void		delcdelem_last(t_aliaslist *root)
+void		delaliaselem_last(t_aliaslist *root)
 {
   if (root->prev != root)
     delaliaselem(root->prev);
 }
 
-void		delcdelem(t_aliaslist *elem)
+void		delaliaselem(t_aliaslist *elem)
 {
-  if (elem->path != NULL)
-    free(elem->path);
   elem->prev->next = elem->next;
   elem->next->prev = elem->prev;
   free(elem);

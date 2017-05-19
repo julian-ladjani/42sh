@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Sat May 13 15:14:47 2017 Ladjani Julian
+** Last update Wed May 17 02:40:04 2017 Ladjani Julian
 */
 
-#include "minishell.h"
+#include "sh.h"
 
 t_cdlist	*cdlist_create()
 {
@@ -26,7 +26,7 @@ t_cdlist	*cdlist_create()
 
 void		clean_cdlist(t_cdlist *list)
 {
-  while (list->next != NULL && list->next->first == 1)
+  while (list->next != NULL)
     {
       list = list->next;
       free(list->prev);
@@ -56,7 +56,7 @@ t_cdlist	*addcdelem_before(t_cdlist *elem)
   return (NULL);
 }
 
-t_cdlist	addcdelem_after(t_cdlist *elem)
+t_cdlist	*addcdelem_after(t_cdlist *elem)
 {
   t_cdlist	*new_elem;
 

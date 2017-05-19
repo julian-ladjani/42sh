@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 13:21:32 2017 Ladjani Julian
-** Last update Tue May  9 13:28:53 2017 Ladjani Julian
+** Last update Wed May 17 11:20:04 2017 Ladjani Julian
 */
 
-#include "42sh.h"
+#include "sh.h"
 
 int		unsetenv_main(t_mysh *vars)
 {
@@ -16,11 +16,11 @@ int		unsetenv_main(t_mysh *vars)
   t_envlist	*elem;
 
   i = 1;
-  while (vars->scmd->av[i] != NULL)
+  while (vars->cmd->data->av[i] != NULL)
     {
-      if ((elem = search_in_list(vars->env, vars->scmd->av[i])) != NULL)
+      if ((elem = search_in_envlist(vars->env, vars->cmd->data->av[i])) != NULL)
         {
-          delelem(elem);
+          delenvelem(elem);
         }
       i++;
     }

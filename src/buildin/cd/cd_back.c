@@ -5,15 +5,15 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 22:24:10 2017 Ladjani Julian
-** Last update Wed May 10 02:58:16 2017 Ladjani Julian
+** Last update Thu May 18 01:50:42 2017 Ladjani Julian
 */
 
-#include "42sh.h"
+#include "sh.h"
 
 t_cdlist	*get_cd_field(t_mysh *vars, int nb)
 {
   int		i;
-  t_cmdlist	*field;
+  t_cdlist	*field;
 
   i = 0;
   field = vars->cdstack->prev;
@@ -35,7 +35,7 @@ int		my_cd_back(t_mysh *vars)
   if ((pwdelem = search_in_envlist(vars->env, "$PWD")) == NULL)
     pwd = strdup(getcwd(NULL, 0));
   else
-    pwd = strdup(pwdelem->value);
+    pwd = strdup(pwdelem->envvalue);
   if ((oldpwd = get_cd_field(vars, nback)) == NULL)
     {
       printf("cd: no such entry in dir stack.\n");
@@ -43,7 +43,7 @@ int		my_cd_back(t_mysh *vars)
     }
   if (chdir(oldpwd->path) < 0)
     {
-      printf("%s: %s.\n", strerror(errno));
+      printf("%s: %s.\n", oldpwd->path, strerror(errno));
       return (ERROR_RETURN);
     }
   my_cd_back2(vars, oldpwd, pwd);
@@ -57,5 +57,5 @@ void		my_cd_back2(t_mysh *vars, t_cdlist *oldpwd, char *pwd)
   oldpwd = vars->cdstack->prev;
   oldpwd->path = strdup(pwd);
   free(pwd);
-  str_to_env(vars->env, "$PWD", getcwd(NULL, 0));
+  str_to_env(vars, "$PWD", getcwd(NULL, 0));
 }

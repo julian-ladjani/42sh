@@ -5,10 +5,10 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Sat May 13 15:11:35 2017 Ladjani Julian
+** Last update Wed May 17 02:43:13 2017 Ladjani Julian
 */
 
-#include "minishell.h"
+#include "sh.h"
 
 t_envlist	*envlist_create()
 {
@@ -64,7 +64,7 @@ t_envlist	*addenvelem_before(t_envlist *elem)
 
 t_envlist	*addenvelem_after(t_envlist *elem)
 {
-  t_list	*new_elem;
+  t_envlist	*new_elem;
 
   if (((new_elem = malloc(sizeof(*new_elem))) != NULL))
     {

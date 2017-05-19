@@ -5,14 +5,14 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Wed May 10 00:47:49 2017 Ladjani Julian
+** Last update Thu May 18 02:52:31 2017 Ladjani Julian
 */
 
-#include "42sh.h"
+#include "sh.h"
 
 void		addcmdelem_first(t_cmdlist *root)
 {
-  addcdelem_after(root);
+  addcmdelem_after(root);
 }
 
 void		addcmdelem_last(t_cmdlist *root)
@@ -34,8 +34,8 @@ void		delcmdelem_last(t_cmdlist *root)
 
 void		delcmdelem(t_cmdlist *elem)
 {
-  if (elem->path != NULL)
-    free(elem->path);
+  if (elem->data != NULL)
+    free(elem->data);
   elem->prev->next = elem->next;
   elem->next->prev = elem->prev;
   free(elem);
