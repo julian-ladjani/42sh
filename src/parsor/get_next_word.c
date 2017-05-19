@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May 15 12:03:01 2017 Ladjani Julian
-** Last update Thu May 18 16:47:37 2017 Ladjani Julian
+** Last update Fri May 19 22:07:15 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -48,8 +48,7 @@ char		*get_next_word(char *word, int *cursor)
       while (inquote != 0 && word[i] != '\0')
         cmd_checkquote(word[++i], &inhib, &inquote);
       word[i] = '\0';
-      word++;
-      i++;
+      //i++;
       while (word[i] == ' ')
 	i++;
       *cursor += (i + 1);

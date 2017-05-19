@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Thu May 11 18:32:34 2017 Ladjani Julian
-** Last update Thu May 18 16:51:59 2017 Ladjani Julian
+** Last update Fri May 19 13:53:29 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -42,14 +42,16 @@ static char	**read_myhistory()
   char		**history;
   char		*line;
   int		i;
+  int		exit;
 
+  exit = 0;
   if ((history = malloc(sizeof(char *))) == NULL)
     return (NULL);
   history[0] = NULL;
   if ((fd = open(HISTORY_FILE, O_RDONLY)) < 0)
     return (history);
   i = 1;
-  while ((line = get_next_line(fd)) != NULL)
+  while ((line = get_next_line(fd, &exit)) != NULL)
     {
       if ((history = realloc(history, (i + 1) * sizeof(char *))) == NULL ||
 	  (history[i - 1] = strdup(line)) == NULL)
@@ -68,14 +70,16 @@ static char	**read_myrc()
   char		**rc;
   char		*line;
   int		i;
+  int		exit;
 
+  exit = 0;
   if ((rc = malloc(sizeof(char *))) == NULL)
     return (NULL);
   rc[0] = NULL;
   if ((fd = open(HISTORY_FILE, O_RDONLY)) < 0)
     return (rc);
   i = 1;
-  while ((line = get_next_line(fd)) != NULL)
+  while ((line = get_next_line(fd, &exit)) != NULL)
     {
       if ((rc = realloc(rc, (i + 1) * sizeof(char *))) == NULL ||
 	  (rc[i - 1] = strdup(line)) == NULL)
@@ -94,15 +98,18 @@ static char	**read_myprompt()
   char		**prompt;
   char		*line;
   int		i;
+  int		exit;
 
+  exit = 0;
   if ((prompt = malloc(sizeof(char *))) == NULL)
     return (NULL);
   prompt[0] = NULL;
-  if ((fd = open(HISTORY_FILE, O_RDONLY)) < 0)
+  if ((fd = open(PROMPT_FILE, O_RDONLY)) < 0)
     return (prompt);
   i = 1;
-  while ((line = get_next_line(fd)) != NULL)
+  while ((line = get_next_line(fd, &exit)) != NULL)
     {
+      printf("%s\n", line);
       if ((prompt = realloc(prompt, (i  + 1)* sizeof(char *))) == NULL ||
 	  (prompt[i - 1] = strdup(line)) == NULL)
 	return (NULL);
@@ -125,10 +132,6 @@ t_mysh		*init_prog(char **ae)
   mysh->exit = 0;
   mysh->pcmdcurs = 0;
   mysh->buffsize = BUFF_SIZE;
-  tcgetattr(STDIN_FILENO, &mysh->oldt);
-  mysh->newt = mysh->oldt;
-  mysh->newt.c_lflag &= ~(ICANON);
-  tcsetattr(STDIN_FILENO, TCSANOW, &mysh->newt);
   if ((mysh->env = envlist_create()) == NULL ||
       (init_my_env(mysh, ae)) == NULL ||
       (mysh->cmd = cmdlist_create()) == NULL ||

@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May 16 14:55:44 2017 Ladjani Julian
-** Last update Thu May 18 16:29:46 2017 Ladjani Julian
+** Last update Fri May 19 22:09:02 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -40,10 +40,13 @@ t_cmdlist	*parse_to_type(t_mysh *vars, t_cmdlist *cmdelem, char *word)
   if (cmdelem == NULL)
     return (NULL);
   if (word == NULL || word[0] == '\0')
-    return (cmdelem);
-  printf("WORD: %s\n", word);
+    {
+      if (cmdelem->data->type == NOTHING)
+	delcmdelem(cmdelem);
+      return (cmdelem);
+    }
   wordtype = check_word(word);
-  if (cmdelem->data->type != NOTHING && cmdelem->data->type != wordtype)
+  if (cmdelem->data->type == CMD && cmdelem->data->type != wordtype)
     if ((cmdelem = addcmdelem_before(vars->cmd)) == NULL)
       return (NULL);
   if (wordtype == CMD)

@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sat May 13 17:13:08 2017 Ladjani Julian
-** Last update Thu May 18 03:40:16 2017 Ladjani Julian
+** Last update Fri May 19 21:54:57 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -18,9 +18,10 @@ t_cmdlist	*parse_my_cmd(t_mysh *vars, t_cmdlist *cmdelem, char *word)
     {
       cmdelem->data->type = CMD;
       cmdelem->data->cmd = word;
-      if ((cmdelem->data->av = malloc(sizeof(char *))) == NULL)
+      if ((cmdelem->data->av = malloc(2 * sizeof(char *))) == NULL)
 	return (NULL);
-      cmdelem->data->av[0] = NULL;
+      cmdelem->data->av[0] = strdup(word);
+      cmdelem->data->av[1] = NULL;
       return (parse_to_type(vars,
 			    cmdelem,
 			    strdup(get_next_word(vars->cmdbuffer, &vars->pcmdcurs))));

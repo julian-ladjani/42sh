@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Thu May 18 14:38:41 2017 Ladjani Julian
+** Last update Fri May 19 14:01:04 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -47,12 +47,8 @@ t_cmdlist	*cmdlist_create()
 
 void		clean_cmdlist(t_cmdlist *list)
 {
-  while (list->next != NULL)
-    {
-      list = list->next;
-      free(list->prev);
-    }
-  free(list);
+  list->next = list;
+  list->prev = list;
 }
 
 t_cmdlist	*addcmdelem_before(t_cmdlist *elem)

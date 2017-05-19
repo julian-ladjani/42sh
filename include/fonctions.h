@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 11:33:00 2017 Ladjani Julian
-** Last update Fri May 19 02:40:40 2017 Ladjani Julian
+** Last update Fri May 19 13:08:53 2017 Ladjani Julian
 */
 
 #ifndef FONCTIONS_H_
@@ -19,7 +19,7 @@ void		my_putstr(char *str);
 void		my_putstrn(char *str);
 void		free_my_tab(char **tab);
 char		*my_strcat(char *dest, char *src);
-char            *get_next_line(const int fd);
+char            *get_next_line(const int fd, int *exit);
 char		**add_str_to_tab(char **tab, char *str);
 char		**my_str_to_wordtab(char *str, char sep);
 int		my_str_isalpha(char *str);
@@ -94,6 +94,8 @@ t_aliaslist	*addaliaselem_after(t_aliaslist *elem);
 ** PROMPT
 */
 
+int		my_prompt(t_mysh *vars);
+
 /*
 ** INITIALISATION
 */
@@ -115,6 +117,9 @@ char		*epur_cmd(char *cmd);
 char		*makespace_cmd(char *cmd, int *buffsize);
 char		*get_next_word(char *word, int *cursor);
 int		make_redir(t_cmdlist *elem, t_cmdlist *root);
+int		parse_list_redir(t_cmdlist *root);
+int		parse_list_pipe(t_cmdlist *root);
+int		parse_list_sep(t_cmdlist *root);
 t_type		cmp_ope(char c1, char c2);
 t_type		check_word(char *word);
 t_cmdlist	*cmdlist_create();

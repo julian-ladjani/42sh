@@ -5,17 +5,19 @@
 ## Login   <julian.ladjani@epitech.eu>
 ## 
 ## Started on  Fri May 19 03:16:22 2017 Ladjani Julian
-## Last update Fri May 19 03:39:02 2017 Ladjani Julian
+## Last update Fri May 19 22:53:10 2017 Ladjani Julian
 ##
 
 TARGET   	 =	42sh
 
 CC     		 = 	gcc
 
+DEBUGFLAG	 =	-g
+
 CFLAGS 		 = 	-Wall -I./include
 
 LINKER 		 =	gcc
-LFLAGS  	 =	-Wall -I./include -lm
+LFLAGS  	 =	-Wall -I./include
 
 SRCDIR 		 =	src
 OBJDIR  	 =	src
@@ -63,7 +65,8 @@ SOURCES 	 := 	$(SRCDIR)/buildin/alias/alias.c \
 		  	$(SRCDIR)/parsor/parse_to_type.c \
 		  	$(SRCDIR)/parsor/start_cmd.c \
 		  	$(SRCDIR)/prompt/pre_read.c \
-		  	$(SRCDIR)/prompt/prompt.c
+		  	$(SRCDIR)/prompt/prompt.c \
+			$(SRCDIR)/parsor/parse_list_sep.c
 OBJECTS		   :=	$(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 rm		   =	rm -f
 
@@ -71,9 +74,12 @@ $(BINDIR)/$(TARGET):	$(OBJECTS)
 		     	@$(LINKER) $(OBJECTS) $(LFLAGS) -o $@
 		     	@echo -e "\e[1;31mLinking complete!\e[1;00m"
 
+.PHONY		   :	all
+all		   :	$(BINDIR)/$(TARGET)
+
 $(OBJECTS)	   : 	$(OBJDIR)/%.o : $(SRCDIR)/%.c
-	   	     	@$(CC) $(CFLAGS) -c $< -o $@
-	  	     	@echo -e "\e[1;32mCompiled "$<" successfully!\e[1;00m"
+	     		@$(CC) $(CFLAGS) -c $< -o $@
+			@if [ "$(CC)" = "gcc" ]; then echo -e "\e[1;32mCompiled "$<" successfully!\e[1;00m"; else echo -e "\e[1;32mCompiled "$<" successfully! \e[1;31mWARNING DEBUG\e[1;00m"; fi
 
 .PHONY		   : 	clean
 clean		   :

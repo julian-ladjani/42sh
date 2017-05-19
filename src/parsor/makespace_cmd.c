@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May 15 12:00:10 2017 Ladjani Julian
-** Last update Thu May 18 16:55:44 2017 Ladjani Julian
+** Last update Fri May 19 22:54:39 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -67,9 +67,10 @@ static int	makespace_see_char(char *cmd, size_t i, int *buffsize)
   int		nbchar;
 
   nbchar = nb_char_op(cmd + i);
-  if (nbchar == 0)
+  if (nbchar == 0 || i == 0)
     return (i + 1);
-  if (cmd[i - 1] != *SPACE_CHAR && nb_char_op(cmd + i - 1) == 0)
+  if (cmd[i - 1] != *SPACE_CHAR  && cmd[i - 1] != *INHIB_CHAR
+      && nb_char_op(cmd + i - 1) == 0)
     {
       if ((cmd = add_cfst(cmd, *SPACE_CHAR, i, buffsize)) == NULL)
 	return (-1);
@@ -97,7 +98,7 @@ char		*makespace_cmd(char *cmd, int *buffsize)
   i = 0;
   while (cmd[i] != '\0')
     {
-      if (cmd[i - 1] != *SPACE_CHAR && inquote == 0 && inhib == 0 &&
+      if ( i > 0 && cmd[i - 1] != *SPACE_CHAR && inquote == 0 && inhib == 0 &&
 	  (cmd[i] == *DQUOTE_CHAR || cmd[i] == *SQUOTE_CHAR))
 	{
 	  if ((cmd = add_cfst(cmd, *SPACE_CHAR, i, buffsize)) == NULL)

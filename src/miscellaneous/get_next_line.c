@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.net>
 ** 
 ** Started on  Mon Jan  2 15:00:28 2017 julian ladjani
-** Last update Wed May 17 12:00:09 2017 Ladjani Julian
+** Last update Fri May 19 13:03:46 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -57,7 +57,7 @@ static char	*my_line(char *buff, int *nbchar, int last)
   return (NULL);
 }
 
-char		*get_next_line(const int fd)
+char		*get_next_line(const int fd, int *exit)
 {
   static int	offset = 0;
   static int	nbchar = 0;
@@ -82,5 +82,6 @@ char		*get_next_line(const int fd)
     }
   if ((line = my_line(buff + nbchar, &nbchar, 1)) != NULL)
     return (line);
+  *exit = 1;
   return (NULL);
 }

@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May  8 17:22:03 2017 Ladjani Julian
-** Last update Fri May 19 02:30:26 2017 Ladjani Julian
+** Last update Fri May 19 13:00:16 2017 Ladjani Julian
 */
 
 #ifndef STRUCTS_H_
