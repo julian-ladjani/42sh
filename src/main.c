@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Thu May 11 12:44:05 2017 Ladjani Julian
-** Last update Fri May 19 02:46:14 2017 Ladjani Julian
+** Last update Fri May 19 03:36:51 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -27,5 +27,5 @@ int		main(int ac, char **av, char **ae)
   (void)av;
   if ((mysh = init_prog(ae)) == NULL)
     return (ERROR_RETURN);
-  call_cmd(mysh, "test |> test>test final");
+  call_cmd(mysh, "test |> test>test finalr");
 }
