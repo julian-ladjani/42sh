@@ -5,7 +5,7 @@
 ## Login   <julian.ladjani@epitech.net>
 ##
 ## Started on  Mon Nov  7 16:31:28 2016 julian ladjani
-## Last update Sat May 20 12:56:12 2017 ilomax
+## Last update Sat May 20 14:33:10 2017 ilomax
 ##
 
 CC 		=	gcc -g
@@ -13,7 +13,8 @@ CC 		=	gcc -g
 SRC		=	src/main.c		\
 			src/find_flags.c	\
 			src/init_opt.c		\
-			src/parser.c		
+			src/parser.c		\
+			src/flags.c		
 
 OBJ		=	$(SRC:.c=.o)
 

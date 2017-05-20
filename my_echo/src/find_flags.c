@@ -5,7 +5,7 @@
 ** Login   <maxime.picot@epitech.eu>
 ** 
 ** Started on  Fri May 19 21:21:32 2017 ilomax
-** Last update Sat May 20 12:58:43 2017 ilomax
+** Last update Sat May 20 13:56:31 2017 ilomax
 */
 
 #include <stdio.h>
@@ -30,30 +30,22 @@ int	cnt_flags(char **av, int ac)
   return (count);
 }
 
-char	*find_flags(char **av, int ac)
+char	*find_flags(char **av)
 {
   int	i;
   int	j;
   int	k;
-  int	n;
   char	*flags;
 
-  n = cnt_flags(av, ac);
-  if ((flags = malloc(sizeof(char) * (n * 2))) == NULL)
+  i = -1;
+  k = -1;
+  if ((flags = malloc(sizeof(char) * 4)) == NULL)
     return (NULL);
-  i = 1;
-  k = 0;
-  while (i <= n)
+  while (av[++i] != NULL)
     {
-      j = 1;
-      while (av[i][j] != '-' && av[i][j] != '\0')
-	{
-	  flags[k] = av[i][j];
-	  ++k;
-	  ++j;
-	}
-      ++i;
+      j = 0;
+      while (av[i][++j] != '\0')
+	flags[++k] = av[i][j];
     }
-  flags[k] = '\0';
   return (flags);
 }
