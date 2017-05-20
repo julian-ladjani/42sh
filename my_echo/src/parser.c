@@ -5,7 +5,7 @@
 ** Login   <maxime.picot@epitech.eu>
 ** 
 ** Started on  Fri May 19 15:10:53 2017 ilomax
-** Last update Sat May 20 13:24:32 2017 ilomax
+** Last update Sat May 20 17:00:15 2017 ilomax
 */
 
 #include <stdio.h>
@@ -25,6 +25,22 @@ int	check_flag(char *str)
       i++;
     }
   return (1);
+}
+
+char	*back_parser(char *str)
+{
+  int	i;
+  
+  i = -1;
+  while (str[++i] != '\0')
+    {
+      if (str[i] == '\\')
+	{
+	  if (char_in_str(str[i + 1], ESC_SEQ) == 1)
+	    printf("YES IT FUCKING IS YOU BELLEND\n");
+	}
+    }
+  return (str);
 }
 
 t_argv		*echo_parser(char **av, int ac)

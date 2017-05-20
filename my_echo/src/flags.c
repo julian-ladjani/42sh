@@ -5,15 +5,35 @@
 ** Login   <maxime.picot@epitech.eu>
 ** 
 ** Started on  Sat May 20 14:16:38 2017 ilomax
-** Last update Sat May 20 14:33:46 2017 ilomax
+** Last update Sat May 20 16:51:59 2017 ilomax
 */
+
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
 void	f_flag(char **av)
 {
-  return ;
+  int	i;
+  char	*str;
+
+  i = -1;
+  while (av[++i] != NULL)
+    {
+      write(1, str, strlen(str));
+      back_parser(av[i]);
+      printf(" ");
+    }
 }
 
 void	F_flag(char **av)
 {
-  return ;
+  int	i;
+
+  i = -1;
+  while (av[++i] != NULL)
+    {
+      write(1, av[i], strlen(av[i]));
+      printf(" ");
+    }
 }
