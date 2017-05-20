@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 11:33:00 2017 Ladjani Julian
-** Last update Sat May 20 16:00:01 2017 Ladjani Julian
+** Last update Sat May 20 20:02:10 2017 Ladjani Julian
 */
 
 #ifndef FONCTIONS_H_
@@ -61,7 +61,7 @@ void		delenvelem_first(t_envlist *root);
 void		delenvelem_last(t_envlist *root);
 void		delenvelem(t_envlist *elem);
 char		**env_to_tabenv(t_envlist *root);
-int		env_main(t_mysh *vars);
+int		env_main(t_mysh *vars, t_cmdlist *list);
 int		unsetenv_main(t_mysh *vars, t_cmdlist *cmd);
 int		setenv_main(t_mysh *vars, t_cmdlist *cmd);
 t_envlist	*search_in_envlist(t_envlist *root, char *word);

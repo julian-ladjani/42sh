@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Fri May 19 00:26:08 2017 Ladjani Julian
-** Last update Fri May 19 02:38:36 2017 Ladjani Julian
+** Last update Sat May 20 22:59:37 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -52,13 +52,13 @@ int			make_redir(t_cmdlist *elem, t_cmdlist *root)
     redirelem = elem;
   while (redirelem->data->type != CMD && redirelem != root)
     redirelem = redirelem->next;
-  if (redirelem->data->type == LREDIR)
+  if (elem->data->type == LREDIR)
     return (make_lredir(elem, redirelem));
-  if (redirelem->data->type == RREDIR)
+  if (elem->data->type == RREDIR)
     return (make_rredir(elem, redirelem));
-  if (redirelem->data->type == LDREDIR)
+  if (elem->data->type == LDREDIR)
     return (make_ldredir(elem, redirelem));
-  if (redirelem->data->type == RDREDIR)
+  if (elem->data->type == RDREDIR)
     return (make_rdredir(elem, redirelem));
   return (ERROR_RETURN);
 }

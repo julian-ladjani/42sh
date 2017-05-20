@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Thu May 11 18:32:34 2017 Ladjani Julian
-** Last update Fri May 19 13:53:29 2017 Ladjani Julian
+** Last update Sat May 20 23:34:44 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -101,17 +101,16 @@ static char	**read_myprompt()
   int		exit;
 
   exit = 0;
-  if ((prompt = malloc(sizeof(char *))) == NULL)
+  if ((prompt = malloc(2 * sizeof(char *))) == NULL)
     return (NULL);
   prompt[0] = NULL;
   if ((fd = open(PROMPT_FILE, O_RDONLY)) < 0)
     return (prompt);
-  i = 1;
+  i = 0;
   while ((line = get_next_line(fd, &exit)) != NULL)
     {
-      printf("%s\n", line);
-      if ((prompt = realloc(prompt, (i  + 1)* sizeof(char *))) == NULL ||
-	  (prompt[i - 1] = strdup(line)) == NULL)
+      if ((prompt = realloc(prompt, (i  + 2) * sizeof(char *))) == NULL ||
+	  (prompt[i] = strdup(line)) == NULL)
 	return (NULL);
       free(line);
       i++;

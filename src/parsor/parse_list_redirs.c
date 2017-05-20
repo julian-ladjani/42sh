@@ -1,11 +1,12 @@
 /*
-** parse_list_redirs.c for 42sh in /home/julian-ladjani/Rendu/PSU/PSU_2016_42sh/src/parsor
+** parse_list_redirs.c 
+for 42sh in /home/julian-ladjani/Rendu/PSU/PSU_2016_42sh/src/parsor
 ** 
 ** Made by Ladjani Julian
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Thu May 18 15:16:26 2017 Ladjani Julian
-** Last update Fri May 19 02:41:16 2017 Ladjani Julian
+** Last update Sat May 20 22:57:49 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -66,7 +67,7 @@ static int		check_output_redir(t_cmdlist *elem,
       return (ERROR_RETURN);
     }
   if (elem->data->stdtype[1] != NOTHING || elem->data->type == RREDIR
-      ||elem->data->type == RDREDIR)
+      || elem->data->type == RDREDIR)
     {
       printf("%s\n", "Ambiguous output redirect.");
       return (ERROR_RETURN);

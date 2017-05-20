@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sat May 20 04:20:23 2017 Ladjani Julian
-** Last update Sat May 20 18:03:11 2017 Ladjani Julian
+** Last update Sat May 20 21:53:26 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -21,9 +21,5 @@ int		check_my_cmd(t_mysh *vars, t_cmdlist *elem)
     }
   if ((elem->data->ae = env_to_tabenv(vars->env)) == NULL)
     return (ERROR_RETURN);
-  if (elem->data->type == RREDIR || elem->data->type == LREDIR ||
-      elem->data->type == RDREDIR || elem->data->type == LDREDIR)
-    if (do_redir(elem) == ERROR_RETURN)
-      return (ERROR_RETURN);
   return (SUCCES_RETURN);
 }

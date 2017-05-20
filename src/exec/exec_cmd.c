@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sat May 20 12:51:41 2017 Ladjani Julian
-** Last update Sat May 20 17:50:47 2017 Ladjani Julian
+** Last update Sat May 20 22:02:41 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -60,14 +60,10 @@ static void	my_exec(t_mysh *vars, t_cmdlist *cmd)
 	dup2(cmd->data->std[1], 1);
       if (cmd->data->cmdtype == EXEC)
 	execve(cmd->data->cmd, cmd->data->av, cmd->data->ae);
-      else
-	exec_buildin(vars, cmd);
       my_putexecerror(vars, cmd);
     }
-  else
+  else 
     {
-      if (cmd->data->stdtype[0] == BROCKENPIPE)
-	write(cmd->data->std[0], "\0", 1);
       if (cmd->data->stdtype[1] == PIPE)
 	close(cmd->data->std[1]);
       if ((cmd->data->stdtype[0] == PIPE || cmd->data->stdtype[1] == PIPE) &&
@@ -81,8 +77,19 @@ static void	my_exec(t_mysh *vars, t_cmdlist *cmd)
 
 int		do_execution(t_mysh *vars, t_cmdlist *cmd)
 {
+  if (cmd->data->stdtype[1] == RREDIR || cmd->data->stdtype[0] == LREDIR ||
+      cmd->data->stdtype[1] == RDREDIR || cmd->data->stdtype[0] == LDREDIR)
+    if (do_redir(cmd) == ERROR_RETURN)
+      return (ERROR_RETURN);
   if ((cmd->data->exitval = check_my_cmd(vars, cmd)) == ERROR_RETURN)
     return (ERROR_RETURN);
-  my_exec(vars, cmd);
+  if (cmd->data->cmdtype == EXEC)
+    my_exec(vars, cmd);
+  else
+    exec_buildin(vars, cmd);
+  if (cmd->data->std[0] != STDIN_FILENO)
+    close(cmd->data->std[0]);
+  if (cmd->data->std[1] != STDOUT_FILENO)
+    close(cmd->data->std[1]);
   return (cmd->data->exitval);
 }
