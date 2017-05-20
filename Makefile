@@ -5,7 +5,7 @@
 ## Login   <julian.ladjani@epitech.eu>
 ## 
 ## Started on  Fri May 19 03:16:22 2017 Ladjani Julian
-## Last update Fri May 19 22:53:10 2017 Ladjani Julian
+## Last update Sat May 20 16:00:44 2017 Ladjani Julian
 ##
 
 TARGET   	 =	42sh
@@ -35,6 +35,7 @@ SOURCES 	 := 	$(SRCDIR)/buildin/alias/alias.c \
 			$(SRCDIR)/buildin/cd/list/cdlist2.c \
 			$(SRCDIR)/buildin/echo/echo.c \
 			$(SRCDIR)/buildin/env/env.c \
+			$(SRCDIR)/buildin/exit/exit.c \
 			$(SRCDIR)/buildin/history/history.c \
 			$(SRCDIR)/buildin/setenv/setenv.c \
 			$(SRCDIR)/buildin/unsetenv/unsetenv.c \
@@ -66,7 +67,14 @@ SOURCES 	 := 	$(SRCDIR)/buildin/alias/alias.c \
 		  	$(SRCDIR)/parsor/start_cmd.c \
 		  	$(SRCDIR)/prompt/pre_read.c \
 		  	$(SRCDIR)/prompt/prompt.c \
-			$(SRCDIR)/parsor/parse_list_sep.c
+			$(SRCDIR)/parsor/parse_list_sep.c \
+			$(SRCDIR)/exec/do_args.c \
+			$(SRCDIR)/exec/do_buildin.c \
+			$(SRCDIR)/exec/do_check_cmd.c \
+			$(SRCDIR)/exec/do_cmd.c \
+			$(SRCDIR)/exec/do_redirs.c \
+			$(SRCDIR)/exec/exec_cmd.c
+
 OBJECTS		   :=	$(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 rm		   =	rm -f
 

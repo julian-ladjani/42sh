@@ -5,20 +5,20 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 13:21:32 2017 Ladjani Julian
-** Last update Wed May 17 11:20:04 2017 Ladjani Julian
+** Last update Sat May 20 14:04:33 2017 Ladjani Julian
 */
 
 #include "sh.h"
 
-int		unsetenv_main(t_mysh *vars)
+int		unsetenv_main(t_mysh *vars, t_cmdlist *cmd)
 {
   int		i;
   t_envlist	*elem;
 
   i = 1;
-  while (vars->cmd->data->av[i] != NULL)
+  while (cmd->data->av[i] != NULL)
     {
-      if ((elem = search_in_envlist(vars->env, vars->cmd->data->av[i])) != NULL)
+      if ((elem = search_in_envlist(vars->env, cmd->data->av[i])) != NULL)
         {
           delenvelem(elem);
         }

@@ -5,10 +5,20 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sat May 13 17:13:08 2017 Ladjani Julian
-** Last update Fri May 19 21:54:57 2017 Ladjani Julian
+** Last update Sat May 20 13:35:35 2017 Ladjani Julian
 */
 
 #include "sh.h"
+
+static t_type	get_my_cmdtype(char *cmd)
+{
+  if (strcmp(cmd, BUILDIN_CD) == 0 || strcmp(cmd, BUILDIN_ECHO) == 0 ||
+      strcmp(cmd, BUILDIN_ENV) == 0 || strcmp(cmd, BUILDIN_UNSETENV) == 0 ||
+      strcmp(cmd, BUILDIN_HISTORY) == 0 || strcmp(cmd, BUILDIN_ALIAS) == 0 ||
+      strcmp(cmd, BUILDIN_SETENV) == 0)
+    return (BUILDIN);
+  return (EXEC);
+}
 
 t_cmdlist	*parse_my_cmd(t_mysh *vars, t_cmdlist *cmdelem, char *word)
 {
@@ -17,7 +27,8 @@ t_cmdlist	*parse_my_cmd(t_mysh *vars, t_cmdlist *cmdelem, char *word)
   if (cmdelem->data->type == NOTHING)
     {
       cmdelem->data->type = CMD;
-      cmdelem->data->cmd = word;
+      cmdelem->data->cmd = strdup(word);
+      cmdelem->data->cmdtype = get_my_cmdtype(cmdelem->data->cmd);
       if ((cmdelem->data->av = malloc(2 * sizeof(char *))) == NULL)
 	return (NULL);
       cmdelem->data->av[0] = strdup(word);

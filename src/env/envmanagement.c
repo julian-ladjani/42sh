@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Jan Jan 22 21:08:00 2017 Julian Ladjani
-** Last update Mon May 15 23:56:20 2017 Ladjani Julian
+** Last update Sat May 20 04:22:03 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -65,14 +65,4 @@ void		str_to_env(t_mysh *vars, char *envvar, char *value)
   elem->env = strdup(elem->envkey);
   elem->env = my_strcat(elem->envkey, "=\0");
   elem->env = my_strcat(elem->envkey, elem->envvalue);
-}
-
-char		*set_my_path(char *path, char *cmd)
-{
-  char		*dest;
-
-  dest = strdup(path);
-  dest = my_strcat(dest, "/");
-  dest = my_strcat(dest, cmd);
-  return (dest);
 }

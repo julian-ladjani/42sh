@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.net>
 **
 ** Started on  Wed Nov 23 12:18:54 2016 julian ladjani
-** Last update Fri May 19 14:01:04 2017 Ladjani Julian
+** Last update Sat May 20 13:49:45 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -22,6 +22,12 @@ t_cmddata	*init_my_cmddata()
       data->std[1] = STDOUT_FILENO;
       data->stdtype[0] = NOTHING;
       data->stdtype[1] = NOTHING;
+      data->eofstd = 0;
+      data->rredirword = NULL;
+      data->lredirword = NULL;
+      data->cmdtype = EXEC;
+      data->exitval = 1;
+      data->status = 0;
       data->cmd = NULL;
       data->av = NULL;
       data->ae = NULL;

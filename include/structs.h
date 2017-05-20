@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May  8 17:22:03 2017 Ladjani Julian
-** Last update Fri May 19 13:00:16 2017 Ladjani Julian
+** Last update Sat May 20 17:38:31 2017 Ladjani Julian
 */
 
 #ifndef STRUCTS_H_
@@ -21,9 +21,12 @@ typedef enum		e_type
     RREDIR,
     LDREDIR,
     RDREDIR,
+    BROCKENPIPE,
     AND,
     OR,
     SEP,
+    EXEC,
+    BUILDIN,
   }			t_type;
 
 typedef enum		e_cmdmode
@@ -57,9 +60,12 @@ typedef struct		s_cmddata
 {
   t_cmdmode		mode;
   t_type		type;
+  t_type		cmdtype;
   int			std[2];
   t_type		stdtype[2];
   int			eofstd;
+  int			status;
+  int			exitval;
   char			*rredirword;
   char			*lredirword;
   char			*cmd;

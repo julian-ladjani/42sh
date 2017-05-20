@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May  8 23:33:12 2017 Ladjani Julian
-** Last update Thu May 18 16:11:33 2017 Ladjani Julian
+** Last update Sat May 20 17:28:30 2017 Ladjani Julian
 */
 
 #ifndef SH_H_
@@ -69,7 +69,9 @@ GET_NEXT_LINE DEFINE
 # define BUILDIN_ALIAS "alias"
 # define BUILDIN_ECHO "echo"
 # define BUILDIN_HISTORY "history"
+# define EXIT_CMD "exit"
 # define ERROR_RETURN 1
 # define SUCCES_RETURN 0
+# define DEFAULT_BIN_FOLDER "/usr/bin"
 
 #endif /* !SH_H_ */

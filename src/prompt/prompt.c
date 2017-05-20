@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 02:30:41 2017 Ladjani Julian
-** Last update Fri May 19 13:57:30 2017 Ladjani Julian
+** Last update Sat May 20 16:16:49 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -39,5 +39,7 @@ int		my_prompt(t_mysh *vars)
 	call_cmd(vars, cmd);
       clean_cmdlist(vars->cmd);
     }
+  printf("exit\n");
+  printf("%d\n", vars->exitval);
   return (vars->exitval);
 }

@@ -5,32 +5,32 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Fri May 19 10:36:22 2017 Ladjani Julian
-** Last update Fri May 19 10:44:34 2017 Ladjani Julian
+** Last update Sat May 20 15:00:24 2017 Ladjani Julian
 */
 
 #include "sh.h"
 
-static int              make_lredir(t_cmdlist *elem)
+static int		do_lredir(t_cmdlist *elem)
 {
-  int                   fd;
+  int			fd;
 
   if ((fd = open(elem->data->cmd, O_RDONLY)) < 0)
     {
-      return (RETURN_ERROR);
+      return (ERROR_RETURN);
     }
-  elem->std[0] = fd;
+  elem->data->std[0] = fd;
   return (SUCCES_RETURN);
 }
 
-static int		do_rredir(t_cmdlist *elem,
-				    t_cmdlist *root,
-				    t_cmdlist *redirelem)
+static int		do_rredir(t_cmdlist *elem)
 {
   int			fd;
 
   if ((fd = open(elem->data->cmd, O_CREAT | O_RDWR | O_TRUNC)) < 0)
-    return (RETURN_ERROR);
-  elem->std[1] = fd;
+    {
+      return (ERROR_RETURN);
+    }
+  elem->data->std[1] = fd;
   return (SUCCES_RETURN);
 }
 
@@ -42,26 +42,30 @@ static int		do_ldredir(t_cmdlist *cmd)
     return (ERROR_RETURN);
   cmd->data->std[0] = fd[0];
   cmd->data->eofstd = fd[1];
+  return (ERROR_RETURN);
 }
 
 static int		do_rdredir(t_cmdlist *cmd)
 {
   int			fd;
 
-  if ((fd = open(elem->data->cmd, O_CREAT | O_RDWR | O_APPEND)) < 0)
-    return (RETURN_ERROR);
+  if ((fd = open(cmd->data->cmd, O_CREAT | O_RDWR | O_APPEND)) < 0)
+    {
+      return (ERROR_RETURN);
+    }
+  cmd->data->std[1] = fd;
   return (SUCCES_RETURN);
 }
 
 int			do_redir(t_cmdlist *cmd)
 {
-  if (cmd->data->type == RREDIR)
+  if (cmd->data->stdtype[1] == RREDIR)
     return (do_rredir(cmd));
-  if (cmd->data->type == LREDIR)
+  if (cmd->data->stdtype[0] == LREDIR)
     return (do_lredir(cmd));
-  if (cmd->data->type == RDREDIR)
+  if (cmd->data->stdtype[1] == RDREDIR)
     return (do_rdredir(cmd));
-  if (cmd->data->type == LDREDIR)
+  if (cmd->data->stdtype[0] == LDREDIR)
     return (do_ldredir(cmd));
   return (ERROR_RETURN);
 }

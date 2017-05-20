@@ -5,7 +5,7 @@
 ** Login   <exam@epitech.net>
 **
 ** Started on  Sat Oct 15 09:20:16 2016 exam user
-** Last update Wed May 17 11:42:31 2017 Ladjani Julian
+** Last update Sat May 20 16:35:03 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -62,6 +62,7 @@ char		**my_str_to_wordtab(char *str, char sep)
 	{
 	  if ((my_array[tab] = malloc(char_count(str, sep) + 2)) == NULL)
 	    exit(84);
+	  memset(my_array[tab], '\0', char_count(str, sep) + 2);
 	  strncpy(my_array[tab], str, char_count(str, sep));
 	  tab++;
 	  str = str + char_count(str, sep);
