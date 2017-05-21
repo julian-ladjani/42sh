@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 22:24:10 2017 Ladjani Julian
-** Last update Sun May 21 20:11:12 2017 Ladjani Julian
+** Last update Sun May 21 23:26:25 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -40,7 +40,10 @@ int		my_cd_back(t_mysh *vars, t_cmdlist *cmd)
   if ((oldpwd = get_cd_back_pwd(vars, nback)) == NULL ||
       oldpwd->path == NULL)
     {
-      printf("cd: no such entry in dir stack.\n");
+      if (nback == 1)
+	printf(": No such file or directory.\n");
+      else
+	printf("cd: no such entry in dir stack.\n");
       return (ERROR_RETURN);
     }
   return (my_chdir(oldpwd->path, vars));
