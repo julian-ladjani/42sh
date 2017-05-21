@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May  8 17:22:03 2017 Ladjani Julian
-** Last update Sun May 21 00:03:33 2017 Ladjani Julian
+** Last update Sun May 21 22:18:20 2017 Ladjani Julian
 */
 
 #ifndef STRUCTS_H_
@@ -46,6 +46,15 @@ typedef struct		s_envlist
   struct s_envlist	*next;
   struct s_envlist	*prev;
 }			t_envlist;
+
+typedef struct		s_makespace
+{
+  int			inhib;
+  int			inquote;
+  int			i;
+  char			*cmd;
+  int			*buffsize;
+}			t_makespace;
 
 typedef struct		s_aliaslist
 {

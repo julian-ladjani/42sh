@@ -5,12 +5,12 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May 15 12:00:10 2017 Ladjani Julian
-** Last update Sun May 21 00:07:11 2017 Ladjani Julian
+** Last update Sun May 21 22:48:58 2017 Ladjani Julian
 */
 
 #include "sh.h"
 
-static char	*add_cfst(char *str, char c, int pos, int *buffsize)
+char		*add_cfst(char *str, char c, int pos, int *buffsize)
 {
   char		*tempstr;
 
@@ -27,7 +27,7 @@ static char	*add_cfst(char *str, char c, int pos, int *buffsize)
   return (str);
 }
 
-static void	makespace_cmd_cond(char c, int *inhib, int *inquote)
+void		makespace_cmd_cond(char c, int *inhib, int *inquote)
 {
   if (c == *DQUOTE_CHAR && *inhib == 0 && *inquote == 0)
     *inquote = 1;
@@ -49,7 +49,7 @@ static void	makespace_cmd_cond(char c, int *inhib, int *inquote)
     *inhib = 0;
 }
 
-static int	nb_char_op(char *cmd)
+int		nb_char_op(char *cmd)
 {
   t_type	op;
 
@@ -62,7 +62,7 @@ static int	nb_char_op(char *cmd)
   return (1);
 }
 
-static int	makespace_see_char(char *cmd, size_t i, int *buffsize)
+int		makespace_see_char(char *cmd, size_t i, int *buffsize)
 {
   int		nbchar;
 
@@ -89,38 +89,17 @@ static int	makespace_see_char(char *cmd, size_t i, int *buffsize)
 
 char		*makespace_cmd(char *cmd, int *buffsize)
 {
-  int		inquote;
-  int		inhib;
-  int		i;
+  t_makespace	space[1];
 
-  inquote = 0;
-  inhib = 0;
-  i = 0;
-  while (cmd[i] != '\0')
+  space->cmd = cmd;
+  space->buffsize = buffsize;
+  space->inhib = 0;
+  space->i = 0;
+  space->inquote = 0;
+  while (cmd[space->i] != '\0')
     {
-      if ( i > 0 && cmd[i - 1] != *SPACE_CHAR && inquote == 0 && inhib == 0 &&
-	  (cmd[i] == *DQUOTE_CHAR || cmd[i] == *SQUOTE_CHAR))
-	{
-	  if ((cmd = add_cfst(cmd, *SPACE_CHAR, i, buffsize)) == NULL)
-	    return (NULL);
-	  i++;
-	}
-      makespace_cmd_cond(cmd[i], &inhib, &inquote);
-      if (cmd[i + 1] != *SPACE_CHAR && inquote == 0 && inhib == 0 &&
-          (cmd[i] == *DQUOTE_CHAR || cmd[i] == *SQUOTE_CHAR)
-	  && cmd[i - 1] != *INHIB_CHAR)
-        {
-          if ((cmd = add_cfst(cmd, *SPACE_CHAR, i + 1, buffsize)) == NULL)
-            return (NULL);
-          i++;
-        }
-      if (inquote == 0 && inhib == 0)
-	{	  
-	  if ((i = makespace_see_char(cmd, i, buffsize)) <= 0)
-	    return (NULL);
-	}
-      else
-	i++;
+      if (makespace_cmd2(space) == NULL)
+	return (NULL);
     }
   return (cmd);
 }

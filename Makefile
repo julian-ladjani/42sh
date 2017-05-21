@@ -5,7 +5,7 @@
 ## Login   <julian.ladjani@epitech.eu>
 ## 
 ## Started on  Fri May 19 03:16:22 2017 Ladjani Julian
-## Last update Sun May 21 21:49:32 2017 Ladjani Julian
+## Last update Sun May 21 22:40:54 2017 Ladjani Julian
 ##
 
 TARGET   	 =	42sh
@@ -58,6 +58,7 @@ SOURCES 	 := 	$(SRCDIR)/buildin/alias/alias.c \
 			$(SRCDIR)/parsor/list/cmdlist2.c \
 			$(SRCDIR)/parsor/list/cmdlist3.c \
 			$(SRCDIR)/parsor/makespace_cmd.c \
+			$(SRCDIR)/parsor/makespace_cmd2.c \
 			$(SRCDIR)/parsor/parse_cmd.c \
 			$(SRCDIR)/parsor/parse_list_pipe.c \
 		  	$(SRCDIR)/parsor/parse_list_redirs.c \

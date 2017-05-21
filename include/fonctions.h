@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 11:33:00 2017 Ladjani Julian
-** Last update Sun May 21 22:12:39 2017 Ladjani Julian
+** Last update Sun May 21 23:13:32 2017 Ladjani Julian
 */
 
 #ifndef FONCTIONS_H_
@@ -30,6 +30,7 @@ int		nmatch(char *s1, char *s2);
 /*
 ** CD
 */
+
 void		clean_cdlist(t_cdlist *list);
 void		delete_cdlist(t_cdlist *list);
 void		addcdelem_first(t_cdlist *root);
@@ -132,6 +133,11 @@ void		delcmdelem(t_cmdlist *elem);
 char		*epur_cmd(char *cmd);
 char		*makespace_cmd(char *cmd, int *buffsize);
 char		*get_next_word(char *word, int *cursor);
+char		*makespace_cmd2(t_makespace *space);
+char		*add_cfst(char *str, char c, int pos, int *buffsize);
+void		makespace_cmd_cond(char c, int *inhib, int *inquote);
+int		nb_char_op(char *cmd);
+int		makespace_see_char(char *cmd, size_t i, int *buffsize);
 int		make_redir(t_cmdlist *elem, t_cmdlist *root);
 int		parse_list_redir(t_cmdlist *root);
 int		parse_list_pipe(t_cmdlist *root);
