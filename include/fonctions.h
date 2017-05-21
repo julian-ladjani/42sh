@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 11:33:00 2017 Ladjani Julian
-** Last update Sun May 21 20:14:56 2017 Ladjani Julian
+** Last update Sun May 21 22:12:39 2017 Ladjani Julian
 */
 
 #ifndef FONCTIONS_H_
@@ -96,7 +96,7 @@ t_aliaslist	*addaliaselem_after(t_aliaslist *elem);
 ** HISTORY
 */
 
-int		history_main(t_mysh *vars);
+int		history_main(t_mysh *vars, t_cmdlist *cmd);
 
 /*
 ** PROMPT
@@ -116,6 +116,7 @@ int		exit_main(char **av);
 
 void		avoid_signaux();
 t_mysh		*init_prog(char **ae);
+void		exit_my_sh(t_mysh *vars);
 
 /*
 ** PARSOR

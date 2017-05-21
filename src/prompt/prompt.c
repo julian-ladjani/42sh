@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 02:30:41 2017 Ladjani Julian
-** Last update Sun May 21 01:33:58 2017 Ladjani Julian
+** Last update Sun May 21 21:57:57 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -40,9 +40,13 @@ int		my_prompt(t_mysh *vars)
       cmd = get_next_line(0, &vars->exit);
       if (cmd != NULL && vars->exit == 0)
 	exitval = call_cmd(vars, cmd);
+      if (cmd != NULL)
+	if ((vars->history = add_str_to_tab(vars->history, cmd)) == NULL)
+	  return (ERROR_RETURN);
       clean_cmdlist(vars->cmd);
       vars->exitval = exitval;
     }
   printf("exit\n");
+  exit_my_sh(vars);
   return (vars->exitval);
 }

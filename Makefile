@@ -5,7 +5,7 @@
 ## Login   <julian.ladjani@epitech.eu>
 ## 
 ## Started on  Fri May 19 03:16:22 2017 Ladjani Julian
-## Last update Sat May 20 16:00:44 2017 Ladjani Julian
+## Last update Sun May 21 21:49:32 2017 Ladjani Julian
 ##
 
 TARGET   	 =	42sh
@@ -73,7 +73,8 @@ SOURCES 	 := 	$(SRCDIR)/buildin/alias/alias.c \
 			$(SRCDIR)/exec/do_check_cmd.c \
 			$(SRCDIR)/exec/do_cmd.c \
 			$(SRCDIR)/exec/do_redirs.c \
-			$(SRCDIR)/exec/exec_cmd.c
+			$(SRCDIR)/exec/exec_cmd.c \
+			$(SRCDIR)/exit_prog.c
 
 OBJECTS		   :=	$(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 rm		   =	rm -f

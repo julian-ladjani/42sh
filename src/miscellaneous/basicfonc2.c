@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Thu Apr  6 15:27:29 2017 Ladjani Julian
-** Last update Fri May 19 22:59:11 2017 Ladjani Julian
+** Last update Sun May 21 21:56:07 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -39,6 +39,13 @@ char	**add_str_to_tab(char **tab, char *str)
   int	tablen;
   int	i;
 
+  if (tab == NULL || tab[0] == NULL)
+    {
+      if ((tab = malloc(2 * sizeof(char *))) == NULL)
+	return (NULL);
+      tab[1] = NULL;
+      tab[0] = strdup(str);
+    }
   tablen = my_tablen(tab);
   i = 0;
   if ((tmptab = malloc((tablen + 2) * sizeof(char *))) == NULL)

@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Thu May 11 18:32:34 2017 Ladjani Julian
-** Last update Sun May 21 20:31:33 2017 Ladjani Julian
+** Last update Sun May 21 22:08:25 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -45,16 +45,16 @@ static char	**read_myhistory()
   int		exit;
 
   exit = 0;
-  if ((history = malloc(sizeof(char *))) == NULL)
+  if ((history = malloc(2 * sizeof(char *))) == NULL)
     return (NULL);
   history[0] = NULL;
   if ((fd = open(HISTORY_FILE, O_RDONLY)) < 0)
     return (history);
-  i = 1;
+  i = 0;
   while ((line = get_next_line(fd, &exit)) != NULL)
     {
-      if ((history = realloc(history, (i + 1) * sizeof(char *))) == NULL ||
-	  (history[i - 1] = strdup(line)) == NULL)
+      if ((history = realloc(history, (i  + 2) * sizeof(char *))) == NULL ||
+	  (history[i] = strdup(line)) == NULL)
 	return (NULL);
       free(line);
       i++;
@@ -73,16 +73,16 @@ static char	**read_myrc()
   int		exit;
 
   exit = 0;
-  if ((rc = malloc(sizeof(char *))) == NULL)
+  if ((rc = malloc(2 * sizeof(char *))) == NULL)
     return (NULL);
   rc[0] = NULL;
-  if ((fd = open(HISTORY_FILE, O_RDONLY)) < 0)
+  if ((fd = open(RC_FILE, O_RDONLY)) < 0)
     return (rc);
-  i = 1;
+  i = 0;
   while ((line = get_next_line(fd, &exit)) != NULL)
     {
-      if ((rc = realloc(rc, (i + 1) * sizeof(char *))) == NULL ||
-	  (rc[i - 1] = strdup(line)) == NULL)
+      if ((rc = realloc(rc, (i  + 2) * sizeof(char *))) == NULL ||
+	  (rc[i] = strdup(line)) == NULL)
 	return (NULL);
       free(line);
       i++;

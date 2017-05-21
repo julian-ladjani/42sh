@@ -5,18 +5,19 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sat May 20 14:05:18 2017 Ladjani Julian
-** Last update Sat May 20 14:06:39 2017 Ladjani Julian
+** Last update Sun May 21 22:13:42 2017 Ladjani Julian
 */
 
 #include "sh.h"
 
-int	history_main(t_mysh *vars)
+int	history_main(t_mysh *vars, t_cmdlist *cmd)
 {
   int	i;
 
+  i = 0;
   while (vars->history[i] != NULL)
     {
-      printf("%s\n", vars->history[i]);
+      dprintf(cmd->data->std[1], "%d: %s\n", i, vars->history[i]);
       i++;
     }
   return (SUCCES_RETURN);
