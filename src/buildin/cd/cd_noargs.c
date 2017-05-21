@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 17:10:16 2017 Ladjani Julian
-** Last update Thu May 18 01:52:27 2017 Ladjani Julian
+** Last update Sun May 21 20:03:08 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -13,35 +13,25 @@
 int		cd_no_args(t_mysh *vars)
 {
   t_envlist	*home;
-  t_envlist	*pwdelem;
   char		*pwd;
+  t_cdlist	*cdfield;
 
-  if ((home = search_in_envlist(vars->env, "$HOME")) == NULL)
+  if ((home = search_in_envlist(vars->env, "HOME")) == NULL ||
+      home->envvalue == NULL)
     {
       printf("cd: No home directory.");
       return (ERROR_RETURN);
     }
-  if ((pwdelem = search_in_envlist(vars->env, "$PWD")) == NULL)
-    pwd = strdup(getcwd(NULL, 0));
-  else
-    pwd = strdup(pwdelem->envvalue);
+  pwd = get_my_pwd(vars);
   if (chdir(home->envvalue) < 0)
     {
       printf("cd: Can't change to home directory.\n");
       return (ERROR_RETURN);
     }
-  return (cd_no_args2(vars, pwd)); 
-}
-
-int		cd_no_args2(t_mysh *vars, char *pwd)
-{
-  t_cdlist	*cdfield;
-
-  addcdelem_before(vars->cdstack);
-  if ((cdfield = vars->cdstack->prev) == NULL)
+  if ((cdfield = addcdelem_before(vars->cdstack)) == NULL)
     return (ERROR_RETURN);
   cdfield->path = strdup(pwd);
-  free(pwd);
-  str_to_env(vars, "$PWD", getcwd(NULL, 0));
+  pwd = strdup(getcwd(NULL, 0));
+  str_to_env(vars, "PWD", pwd);
   return (SUCCES_RETURN);
 }

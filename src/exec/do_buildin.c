@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sat May 20 13:42:10 2017 Ladjani Julian
-** Last update Sat May 20 20:04:51 2017 Ladjani Julian
+** Last update Sun May 21 01:41:50 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -15,7 +15,7 @@ void	exec_buildin(t_mysh *vars, t_cmdlist *cmd)
   if (strcmp(cmd->data->cmd, BUILDIN_CD) == 0)
     cmd->data->exitval = cd_main(vars, cmd);
   else if (strcmp(cmd->data->cmd, BUILDIN_ECHO) == 0)
-    cmd->data->exitval = echo_main(cmd->data->av);
+    cmd->data->exitval = echo_main(cmd->data->av, cmd);
   else if (strcmp(cmd->data->cmd, BUILDIN_ENV) == 0)
     cmd->data->exitval = env_main(vars, cmd);
   else if (strcmp(cmd->data->cmd, BUILDIN_UNSETENV) == 0)

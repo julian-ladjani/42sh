@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 02:24:39 2017 Ladjani Julian
-** Last update Sat May 20 21:15:07 2017 Ladjani Julian
+** Last update Sun May 21 01:31:01 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -42,7 +42,6 @@ static t_cmdlist	*get_next_command(t_cmdlist *cmd,
 }
 
 static int	call_cmd_do(t_mysh *vars, t_cmdlist *cmd)
-
 {
   int		exitval;
 
@@ -63,29 +62,32 @@ static int	call_cmd_do(t_mysh *vars, t_cmdlist *cmd)
       else
 	{
 	  cmd = get_next_command(cmd, vars->cmd, exitval);
-	  exitval = SUCCES_RETURN;
+	  if (cmd != vars->cmd)
+	    exitval = SUCCES_RETURN;
 	}
     }
   return (exitval);
 }
 
-t_mysh		*call_cmd(t_mysh *vars, char *cmd)
+int		call_cmd(t_mysh *vars, char *cmd)
 {
   t_cmdlist	*cmdelem;
 
   vars->pcmdcurs = 0;
+  if (strlen(cmd) < 1)
+    return (ERROR_RETURN);
   memset(vars->cmdbuffer, '\0', vars->buffsize);
   strcpy(vars->cmdbuffer, cmd);
   if ((vars->cmdbuffer = epur_cmd(vars->cmdbuffer)) == NULL ||
       vars->cmdbuffer[0] == '\0' ||
-      (vars->cmdbuffer = makespace_cmd(vars->cmdbuffer, &vars->buffsize)) == NULL ||
+      (vars->cmdbuffer = makespace_cmd(vars->cmdbuffer,
+				       &vars->buffsize)) == NULL ||
       vars->cmdbuffer[0] == '\0' ||
       parse_first_word(vars) == NULL ||
       parse_list_redir(vars->cmd) == ERROR_RETURN ||
       parse_list_pipe(vars->cmd) == ERROR_RETURN ||
       parse_list_sep(vars->cmd) == ERROR_RETURN)
-    return (NULL);
+    return (ERROR_RETURN);
   cmdelem = vars->cmd->next;
-  vars->exitval = call_cmd_do(vars, cmdelem);
-  return (vars);
+  return ((vars->exitval = call_cmd_do(vars, cmdelem)));
 }

@@ -5,10 +5,58 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 13:31:19 2017 Ladjani Julian
-** Last update Sat May 20 14:18:47 2017 Ladjani Julian
+** Last update Sun May 21 20:10:47 2017 Ladjani Julian
 */
 
 #include "sh.h"
+
+char		*get_my_pwd(t_mysh *vars)
+{
+  t_envlist	*pwdelem;
+  char		*pwd;
+
+  if ((pwdelem = search_in_envlist(vars->env, "PWD")) == NULL ||
+      pwdelem->envvalue == NULL)
+    pwd = strdup(getcwd(NULL, 0));
+  else
+    pwd = strdup(pwdelem->envvalue);
+  return (pwd);
+}
+
+int		my_chdir(char *dir, t_mysh *vars)
+{
+  t_cdlist	*cdfield;
+
+  if (dir == NULL)
+    return (ERROR_RETURN);
+  if (chdir(dir) < 0)
+    {
+      printf("%s: %s.\n", dir, strerror(errno));
+      return (ERROR_RETURN);
+    }
+  if ((cdfield = addcdelem_before(vars->cdstack)) == NULL)
+    return (ERROR_RETURN);
+  cdfield->path = strdup(getcwd(NULL, 0));
+  str_to_env(vars, "PWD", strdup(getcwd(NULL, 0)));
+  return (SUCCES_RETURN);
+}
+
+t_cdlist	*get_cd_back_pwd(t_mysh *vars, int nb)
+{
+  int		i;
+  t_cdlist	*list;
+
+  i = 0;
+  list = vars->cdstack->prev;
+  while (i < nb && list != vars->cdstack)
+    {
+      i++;
+      list = list->prev;
+    }
+  if (list == vars->cdstack)
+    return (NULL);
+  return (list);
+}
 
 int		cd_main(t_mysh *vars, t_cmdlist *elem)
 {
@@ -19,9 +67,14 @@ int		cd_main(t_mysh *vars, t_cmdlist *elem)
   cmd = elem->data;
   if (my_tablen(cmd->av) < 2)
     returnvalue = cd_no_args(vars);
-  else if (my_tablen(cmd->av) > 1 && strncmp(cmd->av[1], "-", 1) == 0)
-    returnvalue = my_cd_back(vars);
+  else if (my_tablen(cmd->av) == 2 && strncmp(cmd->av[1], "-", 1) == 0)
+    returnvalue = my_cd_back(vars, elem);
+  else if (my_tablen(cmd->av) == 2)
+    returnvalue = my_cd(vars, elem);
   else
-    returnvalue = my_cd(vars);
+    {
+      printf("cd: Too many arguments.\n");
+      returnvalue = ERROR_RETURN;
+    }
   return (returnvalue);
 }

@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May  8 17:22:03 2017 Ladjani Julian
-** Last update Sat May 20 17:38:31 2017 Ladjani Julian
+** Last update Sun May 21 00:03:33 2017 Ladjani Julian
 */
 
 #ifndef STRUCTS_H_
@@ -84,7 +84,7 @@ typedef struct		s_cdlist
 {
   char			*path;
   struct s_cdlist	*next;
-  struct s_cdlist	*prev;  
+  struct s_cdlist	*prev;
 }			t_cdlist;
 
 typedef struct		s_mysh

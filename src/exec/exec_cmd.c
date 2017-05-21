@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sat May 20 12:51:41 2017 Ladjani Julian
-** Last update Sat May 20 22:02:41 2017 Ladjani Julian
+** Last update Sun May 21 20:15:41 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -44,6 +44,7 @@ static void	my_putexecerror(t_mysh *vars, t_cmdlist *cmd)
   else
     printf("%s.\n", strerror(errno));
   cmd->data->exitval = 1;
+  vars->exitval = 1;
   exit(cmd->data->exitval);
 }
 
@@ -62,7 +63,7 @@ static void	my_exec(t_mysh *vars, t_cmdlist *cmd)
 	execve(cmd->data->cmd, cmd->data->av, cmd->data->ae);
       my_putexecerror(vars, cmd);
     }
-  else 
+  else
     {
       if (cmd->data->stdtype[1] == PIPE)
 	close(cmd->data->std[1]);

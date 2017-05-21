@@ -1,5 +1,0 @@
-/bin/echo -ne "\e[1;36m"
-/bin/echo -ne "\e[1;33m➜  \e[1;36m"
-pwd | grep -o "\w*-*$" | tr -d "\n" | tr -d "\n"
-/bin/echo -n " "
-/bin/echo -ne "\e[0m"

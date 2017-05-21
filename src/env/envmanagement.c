@@ -5,7 +5,7 @@
 ** Login  <julian.ladjani@epitech.eu>
 **
 ** Started on  Jan Jan 22 21:08:00 2017 Julian Ladjani
-** Last update Sat May 20 04:22:03 2017 Ladjani Julian
+** Last update Sun May 21 00:54:43 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -54,15 +54,20 @@ t_envlist	*search_in_envlist(t_envlist *root, char *word)
 void		str_to_env(t_mysh *vars, char *envvar, char *value)
 {
   t_envlist	*elem;
+  int		len;
 
   if ((elem = search_in_envlist(vars->env, envvar)) == NULL)
-    {
-      addenvelem_before(vars->env);
-      elem = vars->env->prev;
-    }
+    elem = addenvelem_before(vars->env);
   elem->envkey = strdup(envvar);
-  elem->envvalue = strdup(value);
+  if (value != NULL)
+    elem->envvalue = strdup(value);
+  len = strlen(envvar);
+  if (value != NULL)
+    len += strlen(value);
   elem->env = strdup(elem->envkey);
-  elem->env = my_strcat(elem->envkey, "=\0");
-  elem->env = my_strcat(elem->envkey, elem->envvalue);
+  if ((elem->env = realloc(elem->env, len + 2)) == NULL)
+    return ;
+  elem->env = strcat(elem->env, "=\0");
+  if (elem->envvalue != NULL)
+    elem->env = strcat(elem->env, elem->envvalue);
 }

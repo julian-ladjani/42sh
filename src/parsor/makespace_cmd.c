@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Mon May 15 12:00:10 2017 Ladjani Julian
-** Last update Fri May 19 22:54:39 2017 Ladjani Julian
+** Last update Sun May 21 00:07:11 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -107,7 +107,8 @@ char		*makespace_cmd(char *cmd, int *buffsize)
 	}
       makespace_cmd_cond(cmd[i], &inhib, &inquote);
       if (cmd[i + 1] != *SPACE_CHAR && inquote == 0 && inhib == 0 &&
-          (cmd[i] == *DQUOTE_CHAR || cmd[i] == *SQUOTE_CHAR) && cmd[i - 1] != *INHIB_CHAR)
+          (cmd[i] == *DQUOTE_CHAR || cmd[i] == *SQUOTE_CHAR)
+	  && cmd[i - 1] != *INHIB_CHAR)
         {
           if ((cmd = add_cfst(cmd, *SPACE_CHAR, i + 1, buffsize)) == NULL)
             return (NULL);

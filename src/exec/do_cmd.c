@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Fri May 19 10:53:47 2017 Ladjani Julian
-** Last update Sat May 20 16:44:55 2017 Ladjani Julian
+** Last update Sun May 21 01:13:12 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -18,7 +18,7 @@ static char		*set_my_cmd2(char *cmd, t_mysh *vars)
   while (cmd && cmd[i] != '\0')
     {
       if (cmd[i] == '/')
-        return (cmd);
+	return (cmd);
       i++;
     }
   return (NULL);
@@ -46,8 +46,11 @@ char			*set_my_cmd_path(t_mysh *vars, t_cmdlist *cmd)
   t_envlist		*elem;
 
   i = 0;
-  if (set_my_cmd2(cmd->data->cmd, vars) != NULL)
+  if (set_my_cmd2(cmd->data->cmd, vars) != NULL &&
+      access(cmd->data->cmd, X_OK) == 0)
     return (cmd->data->cmd);
+  else if (set_my_cmd2(cmd->data->cmd, vars) != NULL)
+    return (NULL);
   if ((elem = search_in_envlist(vars->env, "PATH")) != NULL)
     {
       pathlist = my_str_to_wordtab(elem->envvalue, ':');

@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 13:24:29 2017 Ladjani Julian
-** Last update Sat May 20 19:50:55 2017 Ladjani Julian
+** Last update Sun May 21 00:53:26 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -28,6 +28,9 @@ int	setenv_main(t_mysh *vars, t_cmdlist *cmd)
       printf("%s\n", " contain alphanumeric characters.");
       return (1);
     }
-  str_to_env(vars, cmd->data->av[1], cmd->data->av[2]);
+  if (my_tablen(cmd->data->av) == 3)
+    str_to_env(vars, cmd->data->av[1], cmd->data->av[2]);
+  if (my_tablen(cmd->data->av) == 2)
+    str_to_env(vars, cmd->data->av[1], NULL);
   return (0);
 }

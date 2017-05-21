@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Fri May 19 10:36:22 2017 Ladjani Julian
-** Last update Sat May 20 23:03:25 2017 Ladjani Julian
+** Last update Sat May 20 23:58:19 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -27,7 +27,8 @@ static int		do_rredir(t_cmdlist *elem)
 {
   int			fd;
 
-  if ((fd = open(elem->data->rredirword, O_CREAT | O_TRUNC | O_WRONLY, 0644)) < 0)
+  if ((fd = open(elem->data->rredirword,
+		 O_CREAT | O_TRUNC | O_WRONLY, 0644)) < 0)
     {
       printf("%s: %s.\n", elem->data->rredirword, strerror(errno));
       return (ERROR_RETURN);
@@ -67,7 +68,8 @@ static int		do_rdredir(t_cmdlist *cmd)
 {
   int			fd;
 
-  if ((fd = open(cmd->data->rredirword, O_CREAT | O_APPEND | O_WRONLY, 0644)) < 0)
+  if ((fd = open(cmd->data->rredirword,
+		 O_CREAT | O_APPEND | O_WRONLY, 0644)) < 0)
     {
       printf("%s: %s.\n", cmd->data->rredirword, strerror(errno));
       return (ERROR_RETURN);

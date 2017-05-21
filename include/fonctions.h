@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 11:33:00 2017 Ladjani Julian
-** Last update Sat May 20 20:02:10 2017 Ladjani Julian
+** Last update Sun May 21 20:14:56 2017 Ladjani Julian
 */
 
 #ifndef FONCTIONS_H_
@@ -37,12 +37,13 @@ void		addcdelem_last(t_cdlist *root);
 void		delcdelem_first(t_cdlist *root);
 void		delcdelem_last(t_cdlist *root);
 void		delcdelem(t_cdlist *elem);
-void		my_cd_back2(t_mysh *vars, t_cdlist *oldpwd, char *pwd);
-int		my_cd_back(t_mysh *vars);
+int		my_cd_back(t_mysh *vars, t_cmdlist *cmd);
 int		cd_main(t_mysh *vars, t_cmdlist *cmd);
-int		my_cd(t_mysh *vars);
+int		my_cd(t_mysh *vars, t_cmdlist *cmd);
 int		cd_no_args(t_mysh *vars);
-int		cd_no_args2(t_mysh *vars, char *pwd);
+int		my_chdir(char *dir, t_mysh *vars);
+char		*get_my_pwd(t_mysh *vars);
+t_cdlist	*get_cd_back_pwd(t_mysh *vars, int nb);
 t_cdlist	*cdlist_create();
 t_cdlist	*addcdelem_before(t_cdlist *elem);
 t_cdlist	*addcdelem_after(t_cdlist *elem);
@@ -73,7 +74,7 @@ t_envlist	*addenvelem_after(t_envlist *elem);
 ** ECHO
 */
 
-int		echo_main(char **av);
+int		echo_main(char **av, t_cmdlist *cmd);
 
 /*
 ** ALIAS
@@ -145,7 +146,7 @@ t_cmdlist	*parse_to_type(t_mysh *vars, t_cmdlist *cmdelem, char *word);
 t_cmdlist	*parse_my_redir(t_mysh *vars, t_cmdlist *cmdelem, char *word);
 t_cmdlist	*parse_my_sep(t_mysh *vars, t_cmdlist *cmdelem, char *word);
 t_cmdlist	*parse_my_pipe(t_mysh *vars, t_cmdlist *cmdelem, char *word);
-t_mysh		*call_cmd(t_mysh *vars, char *cmd);
+int		call_cmd(t_mysh *vars, char *cmd);
 
 /*
 ** READER
@@ -161,4 +162,4 @@ int		do_execution(t_mysh *vars, t_cmdlist *cmd);
 int		check_my_cmd(t_mysh *vars, t_cmdlist *cmd);
 int		do_redir(t_cmdlist *cmd);
 
-#endif /* !FONCTION_H_ */
+#endif /* !FONCTIONS_H_ */

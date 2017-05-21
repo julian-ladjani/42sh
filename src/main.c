@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Thu May 11 12:44:05 2017 Ladjani Julian
-** Last update Sat May 20 22:16:14 2017 Ladjani Julian
+** Last update Sun May 21 01:41:16 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -35,8 +35,7 @@ static void	my_input_cmd(t_mysh *vars)
   vars->newt.c_lflag &= ~(ICANON | ECHO);
   while ((cmd = get_next_line(0, &exit)) != NULL && exit == 0)
     {
-      if (call_cmd(vars, cmd) == NULL)
-	vars->exitval = ERROR_RETURN;
+      vars->exitval = call_cmd(vars, cmd);
       i++;
     }
   fcntl(0, F_SETFL, flag);

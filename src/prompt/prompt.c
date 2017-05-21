@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 02:30:41 2017 Ladjani Julian
-** Last update Sat May 20 23:18:15 2017 Ladjani Julian
+** Last update Sun May 21 01:33:58 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -31,15 +31,17 @@ static void	write_prompt(t_mysh *vars)
 int		my_prompt(t_mysh *vars)
 {
   char		*cmd;
+  int		exitval;
 
+  exitval = SUCCES_RETURN;
   while (vars->exit == 0)
     {
       write_prompt(vars);
       cmd = get_next_line(0, &vars->exit);
       if (cmd != NULL && vars->exit == 0)
-	if (call_cmd(vars, cmd) == NULL)
-	  vars->exitval = ERROR_RETURN;
+	exitval = call_cmd(vars, cmd);
       clean_cmdlist(vars->cmd);
+      vars->exitval = exitval;
     }
   printf("exit\n");
   return (vars->exitval);
