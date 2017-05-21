@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 13:31:19 2017 Ladjani Julian
-** Last update Sun May 21 23:25:00 2017 Ladjani Julian
+** Last update Sun May 21 23:31:43 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -58,7 +58,7 @@ t_cdlist	*get_cd_back_pwd(t_mysh *vars, int nb)
   return (list);
 }
 
-static int	my_cd_print(t_mysh *vars)
+static int	my_cd_print(t_mysh *vars, t_cmdlist *cmd)
 {
   t_cdlist	*elem;
   int		i;
@@ -68,7 +68,7 @@ static int	my_cd_print(t_mysh *vars)
   while (elem != vars->cdstack)
     {
       if (elem->path != NULL)
-	printf("%d: %s\n", i, elem->path);
+	dprintf(cmd->data->std[1], "%d: %s\n", i, elem->path);
       i++;
       elem = elem->next;
     }
@@ -85,7 +85,7 @@ int		cd_main(t_mysh *vars, t_cmdlist *elem)
   if (my_tablen(cmd->av) < 2)
     returnvalue = cd_no_args(vars);
   else if (my_tablen(cmd->av) == 2 && strcmp(cmd->av[1], "-print") == 0)
-    returnvalue = my_cd_print(vars);
+    returnvalue = my_cd_print(vars, elem);
   else if (my_tablen(cmd->av) == 2 && strncmp(cmd->av[1], "-", 1) == 0)
     returnvalue = my_cd_back(vars, elem);
   else if (my_tablen(cmd->av) == 2)
