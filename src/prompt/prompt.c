@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 02:30:41 2017 Ladjani Julian
-** Last update Sun May 21 21:57:57 2017 Ladjani Julian
+** Last update Sun May 21 23:19:16 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -28,12 +28,26 @@ static void	write_prompt(t_mysh *vars)
     }
 }
 
+static void	do_shrc(t_mysh *vars)
+{
+  int		i;
+
+  i = 0;
+  while (vars->rc[i] != NULL)
+    {
+      call_cmd(vars, strdup(vars->rc[i]));
+      clean_cmdlist(vars->cmd);
+      i++;
+    }
+}
+
 int		my_prompt(t_mysh *vars)
 {
   char		*cmd;
   int		exitval;
 
   exitval = SUCCES_RETURN;
+  do_shrc(vars);
   while (vars->exit == 0)
     {
       write_prompt(vars);
