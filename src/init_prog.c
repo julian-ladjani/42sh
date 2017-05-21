@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Thu May 11 18:32:34 2017 Ladjani Julian
-** Last update Sat May 20 23:34:44 2017 Ladjani Julian
+** Last update Sun May 21 20:31:33 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -136,6 +136,8 @@ t_mysh		*init_prog(char **ae)
       (mysh->cmd = cmdlist_create()) == NULL ||
       (mysh->alias = aliaslist_create()) == NULL ||
       (mysh->cdstack = cdlist_create()) == NULL ||
+      addcdelem_before(mysh->cdstack) == NULL ||
+      (mysh->cdstack->prev->path = strdup(getcwd(NULL, 0))) == NULL ||
       (mysh->cmdbuffer = malloc(BUFF_SIZE * sizeof(char))) == NULL ||
       (mysh->history = read_myhistory()) == NULL ||
       (mysh->rc = read_myrc()) == NULL ||
