@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Fri May 19 10:53:47 2017 Ladjani Julian
-** Last update Sun May 21 01:13:12 2017 Ladjani Julian
+** Last update Tue Jun  6 19:49:26 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -47,7 +47,7 @@ char			*set_my_cmd_path(t_mysh *vars, t_cmdlist *cmd)
 
   i = 0;
   if (set_my_cmd2(cmd->data->cmd, vars) != NULL &&
-      access(cmd->data->cmd, X_OK) == 0)
+      access(cmd->data->cmd, F_OK) == 0)
     return (cmd->data->cmd);
   else if (set_my_cmd2(cmd->data->cmd, vars) != NULL)
     return (NULL);

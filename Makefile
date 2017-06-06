@@ -5,7 +5,7 @@
 ## Login   <julian.ladjani@epitech.eu>
 ## 
 ## Started on  Fri May 19 03:16:22 2017 Ladjani Julian
-## Last update Sun May 21 22:40:54 2017 Ladjani Julian
+## Last update Fri Jun  2 14:18:17 2017 Ladjani Julian
 ##
 
 TARGET   	 =	42sh
@@ -20,8 +20,6 @@ LINKER 		 =	gcc
 LFLAGS  	 =	-Wall -I./include
 
 SRCDIR 		 =	src
-OBJDIR  	 =	src
-INCLUDEDIR	 =	include
 BINDIR		 =	.
 
 SOURCES 	 := 	$(SRCDIR)/buildin/alias/alias.c \
@@ -77,7 +75,7 @@ SOURCES 	 := 	$(SRCDIR)/buildin/alias/alias.c \
 			$(SRCDIR)/exec/exec_cmd.c \
 			$(SRCDIR)/exit_prog.c
 
-OBJECTS		   :=	$(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJECTS		   :=	$(SOURCES:%.c=%.o)
 rm		   =	rm -f
 
 $(BINDIR)/$(TARGET):	$(OBJECTS)
@@ -87,7 +85,7 @@ $(BINDIR)/$(TARGET):	$(OBJECTS)
 .PHONY		   :	all
 all		   :	$(BINDIR)/$(TARGET)
 
-$(OBJECTS)	   : 	$(OBJDIR)/%.o : $(SRCDIR)/%.c
+$(OBJECTS)	   : 	%.o : %.c
 	     		@$(CC) $(CFLAGS) -c $< -o $@
 			@if [ "$(CC)" = "gcc" ]; then echo -e "\e[1;32mCompiled "$<" successfully!\e[1;00m"; else echo -e "\e[1;32mCompiled "$<" successfully! \e[1;31mWARNING DEBUG\e[1;00m"; fi
 

@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sat May 20 04:20:23 2017 Ladjani Julian
-** Last update Sat May 20 21:53:26 2017 Ladjani Julian
+** Last update Tue Jun  6 19:46:43 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -16,7 +16,7 @@ int		check_my_cmd(t_mysh *vars, t_cmdlist *elem)
     elem->data->cmd = set_my_cmd_path(vars, elem);
   if (elem->data->cmd == NULL)
     {
-      printf("%s: Command not found.\n", elem->data->av[0]);
+      dprintf(1, "%s: Command not found.\n", elem->data->av[0]);
       return (ERROR_RETURN);
     }
   if ((elem->data->ae = env_to_tabenv(vars->env)) == NULL)

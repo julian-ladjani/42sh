@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Tue May  9 13:31:19 2017 Ladjani Julian
-** Last update Sun May 21 23:31:43 2017 Ladjani Julian
+** Last update Tue Jun  6 19:22:28 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -31,7 +31,7 @@ int		my_chdir(char *dir, t_mysh *vars)
     return (ERROR_RETURN);
   if (chdir(dir) < 0)
     {
-      printf("%s: %s.\n", dir, strerror(errno));
+      dprintf(1, "%s: %s.\n", dir, strerror(errno));
       return (ERROR_RETURN);
     }
   if ((cdfield = addcdelem_before(vars->cdstack)) == NULL)

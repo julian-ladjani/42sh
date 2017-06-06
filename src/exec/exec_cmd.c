@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sat May 20 12:51:41 2017 Ladjani Julian
-** Last update Sun May 21 20:15:41 2017 Ladjani Julian
+** Last update Tue Jun  6 19:43:46 2017 Ladjani Julian
 */
 
 #include "sh.h"
@@ -14,8 +14,8 @@ static void	my_return_wait(t_mysh *vars, t_cmdlist *cmd)
 {
   if (WIFEXITED(cmd->data->status))
     {
-      cmd->data->status = WEXITSTATUS(cmd->data->status);
       cmd->data->exitval = WEXITSTATUS(cmd->data->status);
+      cmd->data->status = WEXITSTATUS(cmd->data->status);
     }
   else if (WIFSIGNALED(cmd->data->status))
     {
