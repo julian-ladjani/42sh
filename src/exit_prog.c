@@ -5,15 +5,15 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Sun May 21 21:06:49 2017 Ladjani Julian
-** Last update Sun May 21 21:58:28 2017 Ladjani Julian
+** Last update Tue Jun  6 20:00:03 2017 Ladjani Julian
 */
 
 #include "sh.h"
 
-void	exit_my_sh(t_mysh *vars)
+void		exit_my_sh(t_mysh *vars)
 {
-  int	fd;
-  int	i;
+  int		fd;
+  int		i;
 
   i = 0;
   if ((fd = open(HISTORY_FILE, O_CREAT | O_TRUNC | O_WRONLY, 0644)) < 0)
