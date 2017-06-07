@@ -5,7 +5,7 @@
 ** Login   <julian.ladjani@epitech.eu>
 ** 
 ** Started on  Wed May 17 02:24:39 2017 Ladjani Julian
-** Last update Sun May 21 01:31:01 2017 Ladjani Julian
+** Last update Wed Jun  7 12:13:07 2017 Lorine Forfert
 */
 
 #include "sh.h"
@@ -69,12 +69,26 @@ static int	call_cmd_do(t_mysh *vars, t_cmdlist *cmd)
   return (exitval);
 }
 
+static char	*check_my_buffer(t_mysh *vars, char *cmd)
+{
+  while (strlen(cmd) > (vars->buffsize - 1))
+    {
+      if ((vars->cmdbuffer =
+	   malloc(vars->buffsize + BUFF_SIZE)) == NULL)
+	return (NULL);
+      vars->buffsize += 512;
+    }
+  return (vars->cmdbuffer);
+}
+
 int		call_cmd(t_mysh *vars, char *cmd)
 {
   t_cmdlist	*cmdelem;
 
   vars->pcmdcurs = 0;
   if (strlen(cmd) < 1)
+    return (ERROR_RETURN);
+  if ((vars->cmdbuffer = check_my_buffer(vars, cmd)) == NULL)
     return (ERROR_RETURN);
   memset(vars->cmdbuffer, '\0', vars->buffsize);
   strcpy(vars->cmdbuffer, cmd);
